@@ -1,0 +1,28 @@
+{
+  "original_file": "DOC003_Design_Change_Notice.json",
+  "timestamp": "1758860952.1413224",
+  "extraction_text": "Design Change: Bogie Mounting Bracket (v2.1) (DOC003) Type: Design Change Notice Source: Engineering SharePoint Received: 2025-09-03 Deadline: 2025-09-30 Responsible: Procurement & Rolling Stock Engineer Priority: High Summary: Engineering has approved a design modification to the bogie mounting bracket. Procurement to halt new orders Alerts: - Action: Halt procurement until spec confirmed - Coordination required with Procurement Traceability: Original source attached. Click 'View Source' in the",
+  "metadata": {
+    "document_title": "Design Change: Bogie Mounting Bracket (v2.1) (DOC003)",
+    "from_whom": "Engineering",
+    "to_whom": "Procurement & Rolling Stock Engineer",
+    "for_whom": "Procurement & Rolling Stock Engineer",
+    "date": "2025-09-03",
+    "time": null,
+    "deadline": "2025-09-30",
+    "entities": [
+      "Bogie Mounting Bracket",
+      "Engineering",
+      "Procurement",
+      "Rolling Stock Engineer"
+    ],
+    "job_to_do": "Halt procurement of the bogie mounting bracket until the new specification is confirmed and coordinate with the Rolling Stock Engineer.",
+    "document_categories": [
+      "Design Change Notice"
+    ],
+    "intended_audiences": [
+      "Procurement",
+      "Rolling Stock Engineering"
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "original_file": "DOC002_Vendor_Invoice.json",
+  "timestamp": "1758862119.129163",
+  "extraction_text": "Invoice: Spare Parts Supplier - Invoice #4521 (DOCO002) Type: Vendor Invoice | Priority: Medium | Responsible: Finance Officer Summary: Invoice for supply of brake pads for 12 coaches. Total amount: INR 1,250,000. Verify PO and schedule payment. Alerts: - Pending verification - Payment due: 2025-09-15 Source: Vendor Mailbox (finance@vendor.com) | Received: 2025-09-02",
+  "metadata": {
+    "document_title": "Invoice #4521: Spare Parts Supplier",
+    "from_whom": "Spare Parts Supplier (finance@vendor.com)",
+    "to_whom": "KMRL Finance Department",
+    "for_whom": "Finance Officer",
+    "date": "2025-09-02",
+    "time": null,
+    "deadline": "2025-09-15",
+    "entities": [
+      "Spare Parts Supplier",
+      "Finance Officer",
+      "Brake Pads"
+    ],
+    "job_to_do": "Verify Purchase Order (PO) and schedule payment for invoice #4521.",
+    "document_categories": [
+      "Vendor Invoice",
+      "Finance",
+      "Procurement"
+    ],
+    "intended_audiences": [
+      "Finance Department",
+      "Accounts Payable"
+    ]
+  }
+}

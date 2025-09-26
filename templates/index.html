@@ -18,6 +18,177 @@
             height: 100vh;
             overflow: hidden;
         }
+        
+        /* Global chat text handling */
+        .chat-message * {
+            word-wrap: break-word !important;
+            overflow-wrap: break-word !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+        }
+        
+        .chat-message {
+            word-break: break-word;
+            overflow-wrap: anywhere;
+            max-width: 100%;
+            display: block;
+            margin-bottom: 15px;
+        }
+        
+        #chatMessages {
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        /* Gemini Style Loading Animation */
+        .gemini-loader {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .loader-svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .line {
+            fill: none;
+            stroke-width: 3px;
+            stroke-linecap: round;
+            stroke-dasharray: 120;
+            stroke-dashoffset: 120;
+            animation: draw 1.8s ease-in-out infinite;
+        }
+        
+        /* Gemini brand colors for each line */
+        .line:nth-child(1) {
+            stroke: #4285f4; /* Google Blue */
+            animation-delay: 0s;
+        }
+        
+        .line:nth-child(2) {
+            stroke: #ea4335; /* Google Red */
+            animation-delay: 0.15s;
+        }
+        
+        .line:nth-child(3) {
+            stroke: #fbbc05; /* Google Yellow */
+            animation-delay: 0.3s;
+        }
+        
+        .line:nth-child(4) {
+            stroke: #34a853; /* Google Green */
+            animation-delay: 0.45s;
+        }
+        
+        .line:nth-child(5) {
+            stroke: #8679f2; /* Gemini Purple */
+            animation-delay: 0.6s;
+        }
+        
+        /* Animate the stroke-dashoffset to create the drawing effect */
+        @keyframes draw {
+            0% {
+                stroke-dashoffset: 120;
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            50% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                stroke-dashoffset: -120;
+                opacity: 0;
+            }
+        }
+        
+        .typing-indicator {
+            background: rgba(33, 150, 243, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            max-width: 70%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        /* Chat container scrollbar styling */
+        #chatContainer {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.3) rgba(0, 0, 0, 0.1);
+        }
+        
+        #chatContainer::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        #chatContainer::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+        
+        #chatContainer::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+        
+        #chatContainer::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                background: rgba(33, 150, 243, 0.1);
+            }
+            50% {
+                transform: scale(1.02);
+                background: rgba(33, 150, 243, 0.15);
+            }
+        }
+        
+        @keyframes blink {
+            0%, 50% {
+                opacity: 1;
+            }
+            51%, 100% {
+                opacity: 0;
+            }
+        }
+        
+        /* Compliance Status Styles */
+        .compliance-completed {
+            border-left: 4px solid #4CAF50;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.05));
+        }
+        
+        .compliance-in-progress {
+            border-left: 4px solid #FF9800;
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.1), rgba(255, 152, 0, 0.05));
+        }
+        
+        .compliance-pending {
+            border-left: 4px solid #f44336;
+            background: linear-gradient(135deg, rgba(244, 67, 54, 0.1), rgba(244, 67, 54, 0.05));
+        }
+        
+        .compliance-completed .compliance-actions .btn-update {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+        }
+        
+        .compliance-in-progress .compliance-actions .btn-update {
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+        }
 
         .container {
             display: flex;
@@ -351,6 +522,8 @@
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;  /* Prevent content from overflowing */
+            position: relative;
         }
 
         .document-card:hover {
@@ -377,12 +550,22 @@
             font-size: 18px;
         }
 
+        .document-info {
+            flex: 1;
+            min-width: 0;  /* Enable text truncation */
+        }
+        
         .document-info h3 {
             color: white;
             font-size: 16px;
             font-weight: 600;
             margin: 0 0 4px 0;
             line-height: 1.3;
+            /* Fix text overflow */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
         }
 
         .document-date {
@@ -1231,6 +1414,509 @@
             color: white;
         }
 
+        /* Dashboard Statistics */
+        .dashboard-stats {
+            margin-bottom: 24px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .stat-icon {
+            font-size: 32px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-content {
+            flex: 1;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+        }
+
+        /* Controls Section */
+        .controls-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .controls-right {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .filter-dropdown {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-dropdown:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .filter-dropdown option {
+            background: #1a1a1a;
+            color: white;
+        }
+
+
+        /* Markdown Content Styling */
+        .markdown-content {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Admin Tabs Styling */
+        .admin-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+        }
+
+        .admin-tab {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: none;
+        }
+
+        .admin-tab:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .admin-tab.active {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Analytics Metrics */
+        .analytics-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .metric-icon {
+            font-size: 32px;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .metric-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #4CAF50;
+        }
+
+        .metric-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        /* Compliance & Deadlines */
+        .compliance-header, .analytics-header, .users-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .deadline-filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .deadline-filter {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .deadline-filter.active {
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+            color: white;
+        }
+
+        .compliance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .compliance-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #FF9800;
+        }
+
+        .compliance-card.urgent {
+            border-left-color: #f44336;
+            background: linear-gradient(135deg, rgba(244, 67, 54, 0.1), rgba(244, 67, 54, 0.05));
+        }
+
+        .compliance-card.overdue {
+            border-left-color: #9C27B0;
+            background: linear-gradient(135deg, rgba(156, 39, 176, 0.1), rgba(156, 39, 176, 0.05));
+        }
+
+        /* Category Stats */
+        .category-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .category-stat {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .category-name {
+            flex: 1;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .category-count {
+            color: #4CAF50;
+            font-weight: 600;
+            min-width: 40px;
+        }
+
+        .category-bar {
+            flex: 2;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .category-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+            transition: width 0.5s ease;
+        }
+
+        /* User Management */
+        .users-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .user-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .add-reminder-btn, .add-user-btn {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-reminder-btn:hover, .add-user-btn:hover {
+            background: linear-gradient(135deg, #1976D2, #1565C0);
+            transform: translateY(-1px);
+        }
+        
+        /* Role-Based Dashboard Styles */
+        .role-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .role-selector label {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+        
+        .role-dropdown {
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .role-info-panel {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.05));
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .role-summary h3 {
+            color: #4CAF50;
+            margin: 0 0 10px 0;
+            font-size: 18px;
+        }
+        
+        .role-stats {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+        
+        /* Cross-Team Notifications */
+        .notifications-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .notification-filters {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .notification-filter {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .notification-filter.active {
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+            color: white;
+        }
+        
+        .notifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 20px;
+        }
+        
+        .notification-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #FF9800;
+        }
+        
+        .notification-card.high-priority {
+            border-left-color: #f44336;
+            background: linear-gradient(135deg, rgba(244, 67, 54, 0.1), rgba(244, 67, 54, 0.05));
+        }
+        
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .notification-title {
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .notification-priority {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .priority-high {
+            background: #f44336;
+            color: white;
+        }
+        
+        .priority-medium {
+            background: #FF9800;
+            color: white;
+        }
+        
+        .actionable-content {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 3px solid #4CAF50;
+        }
+        
+        .actionable-content h4 {
+            color: #4CAF50;
+            margin: 0 0 8px 0;
+            font-size: 14px;
+        }
+
+        .markdown-content .md-h1 {
+            color: #4CAF50;
+            font-size: 24px;
+            font-weight: 600;
+            margin: 24px 0 16px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .markdown-content .md-h2 {
+            color: #2196F3;
+            font-size: 20px;
+            font-weight: 600;
+            margin: 20px 0 12px 0;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(33, 150, 243, 0.3);
+        }
+
+        .markdown-content .md-p {
+            margin: 12px 0;
+            text-align: justify;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .markdown-content .md-bold {
+            color: #FF9800;
+            font-weight: 600;
+        }
+
+        .markdown-content .md-ul {
+            margin: 16px 0;
+            padding-left: 0;
+        }
+
+        .markdown-content .md-li {
+            margin: 8px 0;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid #9C27B0;
+            border-radius: 4px;
+            list-style: none;
+            position: relative;
+        }
+
+        .markdown-content .md-li::before {
+            content: "▸";
+            color: #9C27B0;
+            font-weight: bold;
+            position: absolute;
+            left: -8px;
+        }
+
         /* Responsive adjustments for document cards */
         @media (max-width: 768px) {
             .documents-grid {
@@ -1323,7 +2009,6 @@
         <div class="sidebar">
             <div class="logo">KMRL</div>
             <div class="sidebar-btn active" id="uploadBtn" title="Upload Documents">+</div>
-            <div class="sidebar-btn" id="reloadConfigBtn" title="Reload Email Configuration">🔄</div>
             <div class="sidebar-btn" id="searchBtn" title="Search">🔍</div>
             <div class="sidebar-btn" id="settingsBtn" title="Settings">M</div>
         </div>
@@ -1345,8 +2030,334 @@
 
             <!-- Content Area -->
             <div class="content-area">
-                <!-- Documents Grid -->
-                <div id="documentsGrid" class="documents-grid"></div>
+                <!-- Dashboard Statistics -->
+                <div class="dashboard-stats">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">📊</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="totalDocs">0</div>
+                                <div class="stat-label">Total Documents</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📅</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="todayDocs">0</div>
+                                <div class="stat-label">Today's Documents</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">⏰</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="pendingActions">0</div>
+                                <div class="stat-label">Pending Actions</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📧</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="emailsSent">0</div>
+                                <div class="stat-label">Emails Sent</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Role Selection -->
+                <div class="role-selector">
+                    <label for="userRole">👤 Current Role:</label>
+                    <select id="userRole" class="role-dropdown" onchange="switchRole()">
+                        <option value="Admin">Admin (See All)</option>
+                        <option value="Engineer">Engineer</option>
+                        <option value="Inspector">Railway Inspector</option>
+                        <option value="HR">HR Manager</option>
+                        <option value="Finance">Finance Officer</option>
+                        <option value="Safety">Safety Officer</option>
+                        <option value="Procurement">Procurement Manager</option>
+                        <option value="Operations">Operations Manager</option>
+                    </select>
+                </div>
+                
+                <!-- Admin Tab Navigation -->
+                <div class="admin-tabs">
+                    <button class="admin-tab active" onclick="switchTab('dashboard')">📊 My Dashboard</button>
+                    <button class="admin-tab" onclick="switchTab('notifications')">🔔 Cross-Team Alerts</button>
+                    <button class="admin-tab" onclick="switchTab('compliance')">📅 Compliance</button>
+                    <button class="admin-tab" onclick="switchTab('analytics')">📈 Analytics</button>
+                    <button class="admin-tab" onclick="switchTab('users')">👥 Users</button>
+                </div>
+                
+                <!-- Dashboard Tab -->
+                <div id="dashboardTab" class="tab-content active">
+                    <!-- Filter and Sort Controls -->
+                    <div class="controls-section">
+                        <div class="controls-left">
+                            <h2 class="section-title">📋 Document Management</h2>
+                        </div>
+                    <div class="controls-right">
+                        <select id="filterCategory" class="filter-dropdown">
+                            <option value="all">All Categories</option>
+                            <option value="HR">HR Documents</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="Safety">Safety</option>
+                            <option value="Operations">Operations</option>
+                            <option value="Finance">Finance</option>
+                            <option value="General Notice">General Notice</option>
+                        </select>
+                        <select id="sortBy" class="filter-dropdown">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="name">Name A-Z</option>
+                            <option value="category">By Category</option>
+                        </select>
+                    </div>
+                </div>
+
+                    <!-- Role-Based Dashboard Info -->
+                    <div id="roleDashboardInfo" class="role-info-panel">
+                        <div class="role-summary">
+                            <h3 id="roleTitle">Admin Dashboard</h3>
+                            <div class="role-stats">
+                                <span id="roleDocCount">0 documents</span> |
+                                <span id="roleNotifications">0 notifications</span> |
+                                <span id="roleHighPriority">0 high priority</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Documents Grid -->
+                    <div id="documentsGrid" class="documents-grid"></div>
+                </div>
+                
+                <!-- Cross-Team Notifications Tab -->
+                <div id="notificationsTab" class="tab-content">
+                    <div class="notifications-header">
+                        <h3>🔔 Cross-Team Notifications</h3>
+                        <div class="notification-filters">
+                            <button class="notification-filter active" onclick="filterNotifications('all')">All</button>
+                            <button class="notification-filter" onclick="filterNotifications('high')">🔴 High Priority</button>
+                            <button class="notification-filter" onclick="filterNotifications('medium')">🟡 Medium Priority</button>
+                        </div>
+                    </div>
+                    
+                    <div id="notificationsGrid" class="notifications-grid"></div>
+                </div>
+                
+                <!-- Compliance & Deadlines Tab -->
+                <div id="complianceTab" class="tab-content">
+                    <div class="compliance-header">
+                        <h3>📅 Compliance & Regulatory Deadlines</h3>
+                        <button class="add-reminder-btn" onclick="showAddReminderModal()">+ Add Reminder</button>
+                    </div>
+                    
+                    <div class="deadline-filters">
+                        <button class="deadline-filter active" onclick="filterDeadlines('all')">All</button>
+                        <button class="deadline-filter" onclick="filterDeadlines('urgent')">🚨 Urgent (< 7 days)</button>
+                        <button class="deadline-filter" onclick="filterDeadlines('upcoming')">⏰ Upcoming (< 30 days)</button>
+                        <button class="deadline-filter" onclick="filterDeadlines('overdue')">❌ Overdue</button>
+                    </div>
+                    
+                    <div id="complianceGrid" class="compliance-grid"></div>
+                </div>
+                
+                <!-- Analytics Tab -->
+                <div id="analyticsTab" class="tab-content">
+                    <div class="analytics-header">
+                        <h3>📈 Analytics & Performance Metrics</h3>
+                        <select id="analyticsTimeframe" class="filter-dropdown">
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="year">This Year</option>
+                        </select>
+                    </div>
+                    
+                    <div class="analytics-metrics">
+                        <div class="metric-card">
+                            <div class="metric-icon">📄</div>
+                            <div class="metric-info">
+                                <div class="metric-value" id="docsProcessedMetric">120</div>
+                                <div class="metric-label">Documents Processed Today</div>
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="metric-icon">⏱️</div>
+                            <div class="metric-info">
+                                <div class="metric-value" id="timeSavedMetric">3h</div>
+                                <div class="metric-label">Avg. Time Saved per Manager</div>
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="metric-icon">📊</div>
+                            <div class="metric-info">
+                                <div class="metric-value" id="avgProcessingMetric">45s</div>
+                                <div class="metric-label">Avg Processing Time</div>
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="metric-icon">✅</div>
+                            <div class="metric-info">
+                                <div class="metric-value" id="completionRateMetric">98%</div>
+                                <div class="metric-label">Success Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-charts">
+                        <div class="chart-container">
+                            <h4>📈 Processing Trends</h4>
+                            <div id="processingChart" class="chart-placeholder">
+                                <div class="trend-summary">Documents processed over time trend upward</div>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <h4>📋 Top Document Categories</h4>
+                            <div id="categoryChart" class="category-stats">
+                                <div class="category-stat">
+                                    <span class="category-name">Invoices</span>
+                                    <span class="category-count">40</span>
+                                    <div class="category-bar"><div class="category-fill" style="width: 100%"></div></div>
+                                </div>
+                                <div class="category-stat">
+                                    <span class="category-name">Safety Circulars</span>
+                                    <span class="category-count">25</span>
+                                    <div class="category-bar"><div class="category-fill" style="width: 62.5%"></div></div>
+                                </div>
+                                <div class="category-stat">
+                                    <span class="category-name">Reports</span>
+                                    <span class="category-count">15</span>
+                                    <div class="category-bar"><div class="category-fill" style="width: 37.5%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- User Management Tab -->
+                <div id="usersTab" class="tab-content">
+                    <div class="users-header">
+                        <h3>👥 User Management & Role Assignment</h3>
+                        <button class="add-user-btn" onclick="showAddUserModal()">+ Add User</button>
+                    </div>
+                    
+                    <div class="users-grid" id="usersGrid">
+                        <!-- Users will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Compliance & Deadlines Tab -->
+                <div id="complianceTab" class="tab-content">
+                    <div class="compliance-header">
+                        <h3>📅 Compliance & Regulatory Deadlines</h3>
+                        <button class="add-reminder-btn" onclick="showAddReminderModal()">+ Add Reminder</button>
+                    </div>
+                    
+                    <div class="deadline-filters">
+                        <button class="deadline-filter active" onclick="filterDeadlines('all')">All</button>
+                        <button class="deadline-filter" onclick="filterDeadlines('urgent')">🚨 Urgent (< 7 days)</button>
+                        <button class="deadline-filter" onclick="filterDeadlines('upcoming')">⏰ Upcoming (< 30 days)</button>
+                        <button class="deadline-filter" onclick="filterDeadlines('overdue')">❌ Overdue</button>
+                    </div>
+                    
+                    <div id="complianceGrid" class="compliance-grid"></div>
+                </div>
+                
+                <!-- Analytics Tab -->
+                <div id="analyticsTab" class="tab-content">
+                    <div class="analytics-header">
+                        <h3>📈 Analytics & Performance Metrics</h3>
+                        <select id="analyticsTimeframe" class="filter-dropdown">
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="year">This Year</option>
+                        </select>
+                    </div>
+                    
+                    <div class="analytics-metrics">
+                        <div class="metric-card">
+                            <div class="metric-icon">📄</div>
+                            <div class="metric-info">
+                                <div class="metric-value" id="docsProcessedMetric">0</div>
+                                <div class="metric-label">Documents Processed</div>
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="metric-icon">⏱️</div>
+                            <div class="metric-info">
+                                <div class="metric-value" id="timeSavedMetric">0h</div>
+                                <div class="metric-label">Time Saved</div>
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="metric-icon">📊</div>
+                            <div class="metric-info">
+                                <div class="metric-value" id="avgProcessingMetric">0s</div>
+                                <div class="metric-label">Avg Processing Time</div>
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="metric-icon">✅</div>
+                            <div class="metric-info">
+                                <div class="metric-value" id="completionRateMetric">0%</div>
+                                <div class="metric-label">Success Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-charts">
+                        <div class="chart-container">
+                            <h4>📈 Processing Trends</h4>
+                            <div id="processingChart" class="chart-placeholder">
+                                <canvas id="trendChart" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <h4>📋 Top Document Categories</h4>
+                            <div id="categoryChart" class="category-stats">
+                                <div class="category-stat">
+                                    <span class="category-name">Safety Circulars</span>
+                                    <span class="category-count">25</span>
+                                    <div class="category-bar"><div class="category-fill" style="width: 80%"></div></div>
+                                </div>
+                                <div class="category-stat">
+                                    <span class="category-name">Invoices</span>
+                                    <span class="category-count">40</span>
+                                    <div class="category-bar"><div class="category-fill" style="width: 100%"></div></div>
+                                </div>
+                                <div class="category-stat">
+                                    <span class="category-name">Reports</span>
+                                    <span class="category-count">15</span>
+                                    <div class="category-bar"><div class="category-fill" style="width: 60%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- User Management Tab -->
+                <div id="usersTab" class="tab-content">
+                    <div class="users-header">
+                        <h3>👥 User Management & Role Assignment</h3>
+                        <button class="add-user-btn" onclick="showAddUserModal()">+ Add User</button>
+                    </div>
+                    
+                    <div class="users-grid" id="usersGrid">
+                        <!-- Users will be populated here -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1356,11 +2367,9 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <div class="modal-title">Upload Documents</div>
-            <button id="uploadBtn" class="upload-btn">
-                <span class="upload-icon">+</span>
-                Upload Documents
-            </button>
+            
             <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">📁</div>
                 <div class="upload-text">Drop files here or click to upload</div>
                 <div class="upload-subtext">Supports PDF, DOC, DOCX, TXT, and image files</div>
             </div>
@@ -1409,7 +2418,7 @@
                     </div>
                 </div>
                 <div class="json-panel">
-                    <h3 class="panel-title">🔧 Processed Data</h3>
+                    <h3 class="panel-title">📄 Processed Content</h3>
                     <div id="jsonViewer" class="json-prettified"></div>
                 </div>
             </div>
@@ -1513,6 +2522,10 @@
             <div class="processing-summary" id="processingSummary">
                 Initializing pipeline...
             </div>
+            
+            <div class="timer-display" id="timerDisplay" style="text-align: center; margin-top: 15px; font-size: 16px; color: #4CAF50; font-weight: 600;">
+                ⏱️ Time elapsed: 00:00
+            </div>
         </div>
     </div>
 
@@ -1522,6 +2535,254 @@
     <script>
         let uploadedFiles = [];
         let currentReports = [];
+        let startTime;
+        let timerInterval;
+        let currentTab = 'dashboard';
+        let currentRole = 'Admin';
+        let roleDocuments = [];
+        let crossTeamNotifications = [];
+        
+        // Timer functionality
+        function startTimer() {
+            startTime = Date.now();
+            timerInterval = setInterval(updateTimer, 1000);
+            document.getElementById('timerDisplay').style.display = 'block';
+        }
+        
+        function updateTimer() {
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const minutes = Math.floor(elapsed / 60).toString().padStart(2, '0');
+            const seconds = (elapsed % 60).toString().padStart(2, '0');
+            document.getElementById('timerDisplay').textContent = `⏱️ Time elapsed: ${minutes}:${seconds}`;
+        }
+        
+        function stopTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            
+            if (startTime) {
+                const elapsed = Math.floor((Date.now() - startTime) / 1000);
+                const minutes = Math.floor(elapsed / 60);
+                const seconds = elapsed % 60;
+                console.log(`Document conversion completed in ${minutes}m ${seconds}s`);
+                return elapsed;
+            }
+            return 0;
+        }
+        
+        // Role switching functionality
+        function switchRole() {
+            const roleSelect = document.getElementById('userRole');
+            currentRole = roleSelect.value;
+            
+            console.log(`Switching to role: ${currentRole}`);
+            
+            // Update role dashboard info
+            updateRoleInfo();
+            
+            // Load role-specific data
+            loadRoleBasedDashboard();
+            
+            // Load cross-team notifications for this role
+            if (currentTab === 'notifications') {
+                loadCrossTeamNotifications();
+            }
+        }
+        
+        function updateRoleInfo() {
+            const roleTitle = document.getElementById('roleTitle');
+            roleTitle.textContent = `${currentRole} Dashboard`;
+        }
+        
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.admin-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            event.target.classList.add('active');
+            
+            currentTab = tabName;
+            
+            // Load tab-specific data
+            if (tabName === 'dashboard') {
+                loadRoleBasedDashboard();
+            } else if (tabName === 'notifications') {
+                loadCrossTeamNotifications();
+            } else if (tabName === 'compliance') {
+                loadComplianceData();
+            } else if (tabName === 'analytics') {
+                loadAnalyticsData();
+            } else if (tabName === 'users') {
+                loadUsersData();
+            }
+        }
+        
+        // Role-Based Dashboard Functions
+        function loadRoleBasedDashboard() {
+            fetch(`/get-role-dashboard/${currentRole}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    roleDocuments = data.documents;
+                    crossTeamNotifications = data.notifications;
+                    
+                    // Update role stats
+                    document.getElementById('roleDocCount').textContent = `${data.summary.total_documents} documents`;
+                    document.getElementById('roleNotifications').textContent = `${data.summary.pending_notifications} notifications`;
+                    document.getElementById('roleHighPriority').textContent = `${data.summary.high_priority} high priority`;
+                    
+                    // Display role-specific documents
+                    displayRoleBasedDocuments(roleDocuments);
+                    
+                    console.log(`Loaded ${roleDocuments.length} documents for ${currentRole}`);
+                } else {
+                    console.error('Failed to load role dashboard:', data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error loading role dashboard:', error);
+            });
+        }
+        
+        function displayRoleBasedDocuments(documents) {
+            const documentsGrid = document.getElementById('documentsGrid');
+            
+            if (documents.length === 0) {
+                documentsGrid.innerHTML = `<div class="loading">No documents available for ${currentRole} role. Upload and process documents first.</div>`;
+                return;
+            }
+            
+            documentsGrid.innerHTML = documents.map(doc => {
+                const priorityClass = doc.priority === 'high' ? 'high-priority' : doc.priority === 'medium' ? 'medium-priority' : 'low-priority';
+                const priorityIcon = doc.priority === 'high' ? '🔴' : doc.priority === 'medium' ? '🟡' : '🟢';
+                
+                return `
+                    <div class="document-card ${priorityClass}">
+                        <div class="document-header">
+                            <div class="document-icon">📄</div>
+                            <div class="document-info">
+                                <h3>${doc.name} ${priorityIcon}</h3>
+                                <p class="document-date">From: ${doc.from_whom}</p>
+                                <p class="document-categories">Categories: ${doc.categories.join(', ') || 'General'}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="actionable-content">
+                            <h4>🎯 Actionable for ${currentRole}:</h4>
+                            <p>${doc.actionable_content}</p>
+                        </div>
+                        
+                        <div class="document-actions">
+                            <button class="action-btn btn-summary" onclick="showSummary('${doc.filename}')">
+                                📊 Summary
+                            </button>
+                            <button class="action-btn btn-metadata" onclick="showMetadata('${doc.filename}')">
+                                🏷️ Metadata
+                            </button>
+                            <button class="action-btn btn-assign" onclick="showAssignmentModal('${doc.filename}')">
+                                📧 Assign Work
+                            </button>
+                            <button class="action-btn btn-report" onclick="showFullReport('${doc.filename}')">
+                                📋 Full Report
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // Cross-Team Notifications Functions
+        function loadCrossTeamNotifications() {
+            const notificationsGrid = document.getElementById('notificationsGrid');
+            
+            if (crossTeamNotifications.length === 0) {
+                notificationsGrid.innerHTML = '<div class="loading">No cross-team notifications for your role.</div>';
+                return;
+            }
+            
+            displayNotifications(crossTeamNotifications);
+        }
+        
+        function displayNotifications(notifications) {
+            const notificationsGrid = document.getElementById('notificationsGrid');
+            
+            notificationsGrid.innerHTML = notifications.map(notification => {
+                const priorityClass = notification.priority === 'high' ? 'high-priority' : 'medium-priority';
+                const priorityText = notification.priority === 'high' ? 'High Priority' : 'Medium Priority';
+                
+                return `
+                    <div class="notification-card ${priorityClass}">
+                        <div class="notification-header">
+                            <div class="notification-title">
+                                🔔 ${notification.document}
+                            </div>
+                            <div class="notification-priority priority-${notification.priority}">
+                                ${priorityText}
+                            </div>
+                        </div>
+                        
+                        <div class="notification-details">
+                            <div><strong>Source Department:</strong> ${notification.source_department}</div>
+                            <div style="margin: 10px 0;"><strong>Impact Reason:</strong></div>
+                            <p>${notification.impact_reason}</p>
+                            
+                            <div style="margin: 10px 0;"><strong>Action Required:</strong></div>
+                            <p style="color: #4CAF50; font-weight: 500;">${notification.action_required}</p>
+                        </div>
+                        
+                        <div class="notification-actions">
+                            <button class="action-btn btn-summary" onclick="viewNotificationDocument('${notification.document}')">
+                                🔍 View Document
+                            </button>
+                            <button class="action-btn btn-assign" onclick="acknowledgeNotification('${notification.document}')">
+                                ✅ Acknowledge
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function filterNotifications(priority) {
+            // Update active filter button
+            document.querySelectorAll('.notification-filter').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            let filteredNotifications = crossTeamNotifications;
+            if (priority !== 'all') {
+                filteredNotifications = crossTeamNotifications.filter(n => n.priority === priority);
+            }
+            
+            displayNotifications(filteredNotifications);
+        }
+        
+        function viewNotificationDocument(documentName) {
+            // Find the document in role documents and show its summary
+            const document = roleDocuments.find(doc => doc.name === documentName);
+            if (document) {
+                showSummary(document.filename);
+            } else {
+                alert('Document not found. You may not have access to view this document.');
+            }
+        }
+        
+        function acknowledgeNotification(documentName) {
+            alert(`✅ Notification acknowledged for: ${documentName}\n\nThis notification will be marked as read.`);
+            // In a real system, this would make an API call to mark the notification as acknowledged
+        }
 
         // DOM Elements
         const uploadModal = document.getElementById('uploadModal');
@@ -1570,6 +2831,14 @@
         const recipientList = document.getElementById('recipientList');
         const assignmentCancelBtn = document.getElementById('assignmentCancelBtn');
         const assignmentSendBtn = document.getElementById('assignmentSendBtn');
+        
+        // Dashboard Elements
+        const totalDocsEl = document.getElementById('totalDocs');
+        const todayDocsEl = document.getElementById('todayDocs');
+        const pendingActionsEl = document.getElementById('pendingActions');
+        const emailsSentEl = document.getElementById('emailsSent');
+        const filterCategoryEl = document.getElementById('filterCategory');
+        const sortByEl = document.getElementById('sortBy');
 
         // Tab elements
         const metadataTab = document.getElementById('metadataTab');
@@ -1578,36 +2847,8 @@
 
         // Modal functionality
         const uploadBtn = document.getElementById('uploadBtn');
-        const reloadConfigBtn = document.getElementById('reloadConfigBtn');
-        
         uploadBtn.addEventListener('click', () => {
             uploadModal.style.display = 'block';
-        });
-
-        // Reload configuration
-        reloadConfigBtn.addEventListener('click', () => {
-            reloadConfigBtn.style.opacity = '0.5';
-            reloadConfigBtn.textContent = '⏳';
-            
-            fetch('/reload-config', {
-                method: 'POST'
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('✅ Email configuration reloaded successfully!\n\nLatest email addresses from .env file are now active.');
-                } else {
-                    alert('❌ Failed to reload configuration: ' + data.error);
-                }
-                reloadConfigBtn.style.opacity = '1';
-                reloadConfigBtn.textContent = '🔄';
-            })
-            .catch(error => {
-                console.error('Reload error:', error);
-                alert('❌ Failed to reload configuration');
-                reloadConfigBtn.style.opacity = '1';
-                reloadConfigBtn.textContent = '🔄';
-            });
         });
 
         closeModal.addEventListener('click', () => {
@@ -1730,11 +2971,14 @@
         function showProcessingModal() {
             processingModal.style.display = 'block';
             resetProcessingSteps();
+            startTimer(); // Start the timer
             startProcessingAnimation();
         }
 
         function hideProcessingModal() {
             processingModal.style.display = 'none';
+            const processingTime = stopTimer();
+            updateAnalyticsMetrics(processingTime);
         }
 
         function resetProcessingSteps() {
@@ -1743,6 +2987,13 @@
             });
             progressBar.style.width = '0%';
             processingSummary.textContent = 'Initializing pipeline...';
+            
+            // Reset timer display
+            const timerDisplay = document.getElementById('timerDisplay');
+            if (timerDisplay) {
+                timerDisplay.textContent = '⏱️ Time elapsed: 00:00';
+                timerDisplay.style.display = 'block';
+            }
         }
 
         function activateStep(stepNumber) {
@@ -1809,6 +3060,12 @@
                 setTimeout(() => {
                     hideProcessingModal();
                     showCompletionMessage(data);
+                    // Refresh all data after processing animation completes
+                    loadReports();
+                    updateDashboardStats();
+                    if (document.getElementById('complianceGrid')) {
+                        loadComplianceData();
+                    }
                 }, 2000);
             }, 6000);
         }
@@ -1818,6 +3075,7 @@
             message += `📄 Documents Processed: ${data.processing.documents_processed}\n`;
             message += `📊 Summaries Generated: ${data.summaries.generated}\n`;
             message += `🏷️ Metadata Extracted: ${data.metadata.generated}\n`;
+            message += `\n🔄 Dashboard updated with new document count!\n`;
             
             if (data.processing.errors || data.summaries.errors || data.metadata.errors) {
                 message += `\n⚠️ Some issues occurred:\n`;
@@ -1845,8 +3103,8 @@
             .then(data => {
                 if (data.success) {
                     // Simulate the processing steps with animation
+                    // Data refresh will happen after animation completes
                     simulateProcessingSteps(data);
-                    loadReports();
                 } else {
                     hideProcessingModal();
                     alert('Processing failed: ' + data.error);
@@ -1866,18 +3124,41 @@
         // Note: Summary and metadata generation now happens automatically during processing
 
         // Load reports
-        function loadReports() {
-            fetch('/get-reports')
-            .then(response => response.json())
-            .then(reports => {
-                currentReports = reports;
-                displayReports(reports);
+        async function loadReports() {
+            try {
+                const reports = await fetch('/get-reports').then(r => r.json());
                 
-                // Reports loaded - all processing is now automated
-            })
-            .catch(error => {
+                // Enhance reports with metadata information
+                const enhancedReports = await Promise.all(reports.map(async (report) => {
+                    try {
+                        // Try to get metadata for each report
+                        const metadataResponse = await fetch(`/get-metadata/${report.filename}`);
+                        if (metadataResponse.ok) {
+                            const metadataData = await metadataResponse.json();
+                            if (metadataData.success) {
+                                report.categories = metadataData.metadata.document_categories || [];
+                                report.deadline = metadataData.metadata.deadline || null;
+                                report.jobToDo = metadataData.metadata.job_to_do || null;
+                            }
+                        }
+                    } catch (e) {
+                        // If metadata fails, continue without it
+                        report.categories = [];
+                        report.deadline = null;
+                    }
+                    return report;
+                }));
+                
+                allReports = enhancedReports;
+                currentReports = enhancedReports;
+                filteredReports = [...enhancedReports];
+                
+                updateDashboardStats();
+                displayReports(enhancedReports);
+            } catch (error) {
                 console.error('Error loading reports:', error);
-            });
+                documentsGrid.innerHTML = '<div class="loading">Error loading documents</div>';
+            }
         }
 
         function displayReports(reports) {
@@ -2104,8 +3385,14 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
+                    // Update email counter in real-time
+                    updateEmailCounter();
+                    
                     alert(`✅ Assignment sent successfully!\n\nSent to: ${data.recipients.join(', ')}\n\n${data.message}`);
                     assignmentModal.style.display = 'none';
+                    
+                    // Update dashboard stats
+                    updateDashboardStats();
                 } else {
                     alert('Assignment failed: ' + data.error);
                 }
@@ -2167,7 +3454,7 @@
                                 <div style="margin-bottom: 16px;">${baseName}</div>
                                 <a href="/get-original/${filename}" target="_blank" 
                                    style="color: #2196F3; text-decoration: none; padding: 8px 16px; border: 1px solid #2196F3; border-radius: 4px;">
-                                   Download Original File
+                                   📥 Download Original File
                                 </a>
                             </div>
                         `;
@@ -2193,26 +3480,65 @@
         }
 
         function prettifyJSON(obj) {
-            return syntaxHighlight(JSON.stringify(obj, null, 2));
+            return convertToMarkdown(obj);
         }
 
-        function syntaxHighlight(json) {
-            json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-            return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
-                var cls = 'json-number';
-                if (/^"/.test(match)) {
-                    if (/:$/.test(match)) {
-                        cls = 'json-key';
-                    } else {
-                        cls = 'json-string';
+        function convertToMarkdown(data) {
+            if (!data || !Array.isArray(data)) {
+                return '<div class="markdown-content"><p>No data available</p></div>';
+            }
+
+            let markdown = '';
+            let currentSection = '';
+            let textContent = '';
+            
+            // Group elements by type and extract text content
+            data.forEach((element, index) => {
+                if (element.type === 'Title') {
+                    if (textContent) {
+                        markdown += `## ${currentSection}\n\n${textContent}\n\n`;
+                        textContent = '';
                     }
-                } else if (/true|false/.test(match)) {
-                    cls = 'json-boolean';
-                } else if (/null/.test(match)) {
-                    cls = 'json-null';
+                    currentSection = element.text || 'Untitled Section';
+                } else if (element.type === 'NarrativeText' || element.type === 'UncategorizedText') {
+                    textContent += (element.text || '') + '\n\n';
+                } else if (element.type === 'ListItem') {
+                    textContent += `• ${element.text || ''}\n`;
+                } else if (element.type === 'Table') {
+                    textContent += `**Table Content:**\n${element.text || 'Table data'}\n\n`;
+                } else if (element.text) {
+                    textContent += `${element.text}\n\n`;
                 }
-                return '<span class="' + cls + '">' + match + '</span>';
             });
+            
+            // Add remaining content
+            if (textContent) {
+                markdown += `## ${currentSection || 'Document Content'}\n\n${textContent}`;
+            }
+            
+            // Convert markdown to HTML
+            return `<div class="markdown-content">${markdownToHTML(markdown)}</div>`;
+        }
+
+        function markdownToHTML(markdown) {
+            return markdown
+                // Headers
+                .replace(/^## (.*$)/gim, '<h2 class="md-h2">$1</h2>')
+                .replace(/^# (.*$)/gim, '<h1 class="md-h1">$1</h1>')
+                // Bold text
+                .replace(/\*\*(.*?)\*\*/g, '<strong class="md-bold">$1</strong>')
+                // Lists
+                .replace(/^• (.*$)/gim, '<li class="md-li">$1</li>')
+                // Paragraphs (convert double newlines to paragraphs)
+                .replace(/\n\n/g, '</p><p class="md-p">')
+                // Wrap in paragraph tags
+                .replace(/^(.+)$/gim, '<p class="md-p">$1</p>')
+                // Clean up list items
+                .replace(/<p class="md-p"><li class="md-li">(.*?)<\/li><\/p>/g, '<li class="md-li">$1</li>')
+                // Wrap consecutive list items in ul tags
+                .replace(/(<li class="md-li">.*?<\/li>)+/g, '<ul class="md-ul">$&</ul>')
+                // Clean up empty paragraphs
+                .replace(/<p class="md-p"><\/p>/g, '');
         }
 
         function loadOriginalDocument(filename) {
@@ -2320,8 +3646,854 @@
             }
         });
 
+        // Global variables for filtering
+        let allReports = [];
+        let filteredReports = [];
+        let dashboardStats = {
+            totalDocs: 0,
+            todayDocs: 0,
+            pendingActions: 0,
+            emailsSent: 0
+        };
+
+        // Filter and sort event listeners
+        filterCategoryEl.addEventListener('change', applyFilters);
+        sortByEl.addEventListener('change', applyFilters);
+
+        function applyFilters() {
+            const categoryFilter = filterCategoryEl.value;
+            const sortBy = sortByEl.value;
+            
+            // Filter by category
+            if (categoryFilter === 'all') {
+                filteredReports = [...allReports];
+            } else {
+                filteredReports = allReports.filter(report => {
+                    // Check if report has metadata with categories
+                    return report.categories && report.categories.includes(categoryFilter);
+                });
+            }
+            
+            // Sort reports
+            filteredReports.sort((a, b) => {
+                switch (sortBy) {
+                    case 'newest':
+                        return b.modified - a.modified;
+                    case 'oldest':
+                        return a.modified - b.modified;
+                    case 'name':
+                        return a.name.localeCompare(b.name);
+                    case 'category':
+                        const aCat = a.categories ? a.categories[0] : '';
+                        const bCat = b.categories ? b.categories[0] : '';
+                        return aCat.localeCompare(bCat);
+                    default:
+                        return 0;
+                }
+            });
+            
+            displayReports(filteredReports);
+        }
+
+        function updateDashboardStats() {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            dashboardStats.totalDocs = allReports.length;
+            dashboardStats.todayDocs = allReports.filter(report => {
+                const reportDate = new Date(report.modified * 1000);
+                reportDate.setHours(0, 0, 0, 0);
+                return reportDate.getTime() === today.getTime();
+            }).length;
+            
+            // Count pending actions (documents with deadlines that are not completed)
+            dashboardStats.pendingActions = allReports.filter(report => 
+                report.deadline && 
+                report.deadline !== 'N/A' && 
+                report.deadline !== 'null' &&
+                (!report.compliance_status || report.compliance_status !== 'completed')
+            ).length;
+            
+            // Simulate emails sent (could be stored in localStorage or backend)
+            dashboardStats.emailsSent = parseInt(localStorage.getItem('emailsSent') || '0');
+            
+            // Update UI
+            totalDocsEl.textContent = dashboardStats.totalDocs;
+            todayDocsEl.textContent = dashboardStats.todayDocs;
+            pendingActionsEl.textContent = dashboardStats.pendingActions;
+            emailsSentEl.textContent = dashboardStats.emailsSent;
+            
+            // Add animation
+            animateNumber(totalDocsEl, dashboardStats.totalDocs);
+            animateNumber(todayDocsEl, dashboardStats.todayDocs);
+            animateNumber(pendingActionsEl, dashboardStats.pendingActions);
+            animateNumber(emailsSentEl, dashboardStats.emailsSent);
+        }
+
+        function animateNumber(element, targetValue) {
+            const startValue = 0;
+            const duration = 1000;
+            const startTime = performance.now();
+            
+            function updateNumber(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const currentValue = Math.floor(startValue + (targetValue - startValue) * progress);
+                element.textContent = currentValue;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateNumber);
+                }
+            }
+            
+            requestAnimationFrame(updateNumber);
+        }
+
+
+        // Advanced Features Functions
+        
+        // Compliance & Deadlines Functions - Load from Real Documents
+        function loadComplianceData() {
+            const complianceGrid = document.getElementById('complianceGrid');
+            
+            // Show loading state
+            complianceGrid.innerHTML = '<div class="loading">Loading compliance data from processed documents...</div>';
+            
+            // Fetch real compliance data from processed documents
+            fetch('/get-compliance-data')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const complianceItems = data.compliance_items;
+                    
+                    console.log(`Loaded ${complianceItems.length} compliance items from real documents`);
+                    
+                    if (complianceItems.length === 0) {
+                        complianceGrid.innerHTML = '<div class="loading">No compliance deadlines found in processed documents. Upload documents with deadline information.</div>';
+                        return;
+                    }
+                    
+                    // Display real compliance items from documents
+                    displayComplianceItems(complianceItems);
+                    
+                    console.log(`Compliance Summary: ${data.summary.total_items} total, ${data.summary.urgent} urgent, ${data.summary.overdue} overdue`);
+                    
+                } else {
+                    complianceGrid.innerHTML = `<div class="loading">Error loading compliance data: ${data.error}</div>`;
+                }
+            })
+            .catch(error => {
+                console.error('Error loading compliance data:', error);
+                complianceGrid.innerHTML = '<div class="loading">Error loading compliance data from documents.</div>';
+            });
+        }
+        
+        function displayComplianceItems(complianceItems) {
+            const complianceGrid = document.getElementById('complianceGrid');
+            
+            complianceGrid.innerHTML = complianceItems.map(item => {
+                const daysUntil = item.days_until;
+                const statusClass = item.status;
+                const statusIcon = item.status === 'urgent' ? '🚨' : item.status === 'overdue' ? '❌' : '⏰';
+                
+                const reminderStatus = item.reminder_sent ? '✅ Reminder Sent' : '⚠️ No Reminder';
+                const reminderClass = item.reminder_sent ? 'reminder-sent' : 'no-reminder';
+                
+                // Get compliance status
+                const complianceStatus = item.compliance_status || 'pending';
+                const complianceIcon = complianceStatus === 'completed' ? '✅' : complianceStatus === 'in-progress' ? '🔄' : '⏳';
+                const complianceClass = `compliance-${complianceStatus}`;
+                
+                // Format days until deadline
+                const daysText = daysUntil < 0 ? `${Math.abs(daysUntil)} days overdue` : `${daysUntil} days`;
+                
+                return `
+                    <div class="compliance-card ${statusClass} ${complianceClass}">
+                        <div class="compliance-header">
+                            <h4>${statusIcon} ${item.title}</h4>
+                            <span class="deadline-badge">${daysText}</span>
+                        </div>
+                        <p class="compliance-description">${item.description}</p>
+                        <div class="compliance-details">
+                            <div><strong>Category:</strong> ${item.category}</div>
+                            <div><strong>Deadline:</strong> ${item.deadline}</div>
+                            <div><strong>Assigned to:</strong> ${item.assignedTo}</div>
+                            <div class="${reminderClass}"><strong>Reminder:</strong> ${reminderStatus}</div>
+                            <div class="${complianceClass}"><strong>Compliance:</strong> ${complianceIcon} ${complianceStatus.charAt(0).toUpperCase() + complianceStatus.slice(1)}</div>
+                        </div>
+                        <div class="compliance-actions">
+                            <button class="btn-reminder" onclick="sendReminder('${item.title}')">📧 Send Reminder</button>
+                            <button class="btn-update" onclick="updateComplianceStatus('${item.filename}', '${item.title}')">✏️ Update Status</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function filterDeadlines(filter) {
+            // Update active filter button
+            document.querySelectorAll('.deadline-filter').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Filter compliance items (implementation would filter the grid)
+            console.log(`Filtering deadlines by: ${filter}`);
+        }
+        
+        // Analytics Functions
+        function loadAnalyticsData() {
+            updateAnalyticsMetrics();
+            updateCategoryStats();
+        }
+        
+        function updateAnalyticsMetrics(processingTime = 0) {
+            // Get real-time email count from localStorage
+            const emailsSent = parseInt(localStorage.getItem('emailsSent') || '0');
+            
+            // Sample analytics data - in real app, fetch from backend
+            const metrics = {
+                docsProcessed: currentReports.length,
+                timeSaved: Math.floor(currentReports.length * 2.5), // 2.5 hours saved per doc
+                avgProcessing: processingTime || 45, // seconds
+                successRate: 98,
+                emailsSent: emailsSent
+            };
+            
+            // Animate counter updates
+            animateCounter('docsProcessedMetric', metrics.docsProcessed);
+            animateCounter('timeSavedMetric', metrics.timeSaved, 'h');
+            animateCounter('avgProcessingMetric', metrics.avgProcessing, 's');
+            animateCounter('completionRateMetric', metrics.successRate, '%');
+            
+            // Update emails sent in analytics tab if it exists
+            const emailsMetricEl = document.getElementById('emailsProcessedMetric');
+            if (emailsMetricEl) {
+                animateCounter('emailsProcessedMetric', metrics.emailsSent);
+            }
+        }
+        
+        function updateCategoryStats() {
+            // Count documents by category
+            const categoryCount = {};
+            currentReports.forEach(report => {
+                if (report.categories) {
+                    report.categories.forEach(cat => {
+                        categoryCount[cat] = (categoryCount[cat] || 0) + 1;
+                    });
+                }
+            });
+            
+            // Update category chart
+            const categoryChart = document.getElementById('categoryChart');
+            const maxCount = Math.max(...Object.values(categoryCount));
+            
+            categoryChart.innerHTML = Object.entries(categoryCount)
+                .sort(([,a], [,b]) => b - a)
+                .slice(0, 5) // Top 5 categories
+                .map(([category, count]) => {
+                    const percentage = (count / maxCount) * 100;
+                    return `
+                        <div class="category-stat">
+                            <span class="category-name">${category}</span>
+                            <span class="category-count">${count}</span>
+                            <div class="category-bar">
+                                <div class="category-fill" style="width: ${percentage}%"></div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+        }
+        
+        // User Management Functions - Updated with Railway Inspector example
+        function loadUsersData() {
+            const usersGrid = document.getElementById('usersGrid');
+            
+            // KMRL User data with your exact Railway Inspector example
+            const users = [
+                {
+                    name: "Railway Inspector Kumar",
+                    email: "inspector.kumar@kmrl.co.in", 
+                    role: "Railway Inspector",
+                    department: "Safety Circulars",
+                    permissions: ["Safety Circulars only"],
+                    lastActive: "2025-09-25",
+                    status: "active",
+                    assignedCategories: ["Safety Circulars"]
+                },
+                {
+                    name: "Priya Sharma", 
+                    email: "priya.sharma@kmrl.co.in",
+                    role: "HR Manager",
+                    department: "Human Resources", 
+                    permissions: ["All HR Documents"],
+                    lastActive: "2025-09-25",
+                    status: "active",
+                    assignedCategories: ["HR"]
+                },
+                {
+                    name: "Rajesh Safety Officer",
+                    email: "rajesh.safety@kmrl.co.in",
+                    role: "Safety Inspector", 
+                    department: "Safety",
+                    permissions: ["Safety Documents", "Compliance"],
+                    lastActive: "2025-09-25", 
+                    status: "active",
+                    assignedCategories: ["Safety", "Compliance"]
+                }
+            ];
+            
+            usersGrid.innerHTML = users.map(user => `
+                <div class="user-card">
+                    <div class="user-header">
+                        <div class="user-avatar">👤</div>
+                        <div class="user-info">
+                            <h4>${user.name}</h4>
+                            <p>${user.email}</p>
+                        </div>
+                        <div class="user-status ${user.status}">${user.status}</div>
+                    </div>
+                    <div class="user-details">
+                        <div><strong>Role:</strong> ${user.role}</div>
+                        <div><strong>Department:</strong> ${user.department}</div>
+                        <div><strong>Access:</strong> ${user.permissions.join(', ')}</div>
+                        <div><strong>Categories:</strong> ${user.assignedCategories.join(', ')}</div>
+                        <div><strong>Last Active:</strong> ${user.lastActive}</div>
+                    </div>
+                    <div class="user-actions">
+                        <button class="btn-edit" onclick="editUser('${user.email}')">✏️ Edit</button>
+                        <button class="btn-permissions" onclick="managePermissions('${user.email}')">🔐 Permissions</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Utility Functions
+        function animateCounter(elementId, targetValue, suffix = '') {
+            const element = document.getElementById(elementId);
+            const startValue = 0;
+            const duration = 1000;
+            const startTime = Date.now();
+            
+            function updateCounter() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const currentValue = Math.floor(startValue + (targetValue - startValue) * progress);
+                
+                element.textContent = currentValue + suffix;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                }
+            }
+            
+            requestAnimationFrame(updateCounter);
+        }
+        
+        // Placeholder functions for modal interactions
+        function showAddReminderModal() {
+            alert('Add Reminder Modal - To be implemented');
+        }
+        
+        function showAddUserModal() {
+            alert('Add User Modal - To be implemented');
+        }
+        
+        // Real compliance reminder functions
+        function sendComplianceReminder(filename, title) {
+            // Send assignment email for compliance document
+            fetch(`/assign-work/${filename}`, {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(`✅ Compliance reminder sent successfully!\n\nDocument: ${title}\nSent to: ${data.recipients.join(', ')}`);
+                    // Reload compliance data to update reminder status
+                    loadComplianceData();
+                } else {
+                    alert(`Failed to send reminder: ${data.error}`);
+                }
+            })
+            .catch(error => {
+                console.error('Error sending compliance reminder:', error);
+                alert('Error sending compliance reminder');
+            });
+        }
+        
+        async function updateComplianceStatus(filename, title) {
+            const newStatus = prompt(`Update compliance status for: ${title}\n\nEnter new status (completed/in-progress/pending):`);
+            if (newStatus && ['completed', 'in-progress', 'pending'].includes(newStatus.toLowerCase())) {
+                try {
+                    const response = await fetch('/update-action-status', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                            filename: filename,
+                            status: newStatus.toLowerCase()
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        alert(`✅ Status updated to: ${newStatus}`);
+                        // Refresh the dashboard to show updated counts
+                        loadReports();
+                        updateDashboardStats();
+                        // Also refresh compliance data to show updated status
+                        if (document.getElementById('complianceGrid')) {
+                            loadComplianceData();
+                        }
+                    } else {
+                        alert(`❌ Error: ${result.error}`);
+                    }
+                } catch (error) {
+                    alert(`❌ Error updating status: ${error.message}`);
+                }
+            } else if (newStatus) {
+                alert('❌ Invalid status. Please enter: completed, in-progress, or pending');
+            }
+        }
+        
+        function editUser(email) {
+            alert(`Editing user: ${email}`);
+        }
+        
+        function managePermissions(email) {
+            alert(`Managing permissions for: ${email}`);
+        }
+
+        // Email counter functions
+        function updateEmailCounter() {
+            // Get current count from localStorage
+            let currentCount = parseInt(localStorage.getItem('emailsSent') || '0');
+            
+            // Increment by 1
+            currentCount += 1;
+            
+            // Save to localStorage
+            localStorage.setItem('emailsSent', currentCount.toString());
+            
+            // Update UI immediately with animation
+            const emailsSentEl = document.getElementById('emailsSent');
+            animateNumber(emailsSentEl, currentCount);
+            
+            // Update dashboard stats object
+            dashboardStats.emailsSent = currentCount;
+            
+            console.log(`Email counter updated: ${currentCount}`);
+        }
+        
+        function resetEmailCounter() {
+            localStorage.setItem('emailsSent', '0');
+            const emailsSentEl = document.getElementById('emailsSent');
+            emailsSentEl.textContent = '0';
+            dashboardStats.emailsSent = 0;
+        }
+
         // Load reports on page load
         loadReports();
+        
+        // Initialize role-based dashboard
+        loadRoleBasedDashboard();
     </script>
+    
+    <!-- RAG Chat Modal -->
+    <div id="ragChatModal" class="modal" style="display: none;">
+        <div class="modal-content" style="max-width: 900px; width: 90vw; height: 80vh; display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box;">
+            <div class="modal-header">
+                <h2>💬 Chat with KMRL Documents</h2>
+                <span class="close" onclick="closeRAGChat()">&times;</span>
+            </div>
+            <div class="modal-body" style="flex: 1; display: flex; flex-direction: column; padding: 20px; min-height: 0;">
+                <div id="chatContainer" style="flex: 1; overflow-y: auto; overflow-x: hidden; background: rgba(0,0,0,0.3); border-radius: 10px; padding: 20px; margin-bottom: 20px; max-width: 100%; min-height: 0; scroll-behavior: smooth;">
+                    <div id="chatMessages" style="display: flex; flex-direction: column; gap: 15px; max-width: 100%;">
+                        <div class="chat-message system" style="background: rgba(33, 150, 243, 0.1); padding: 15px; border-radius: 10px; word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; box-sizing: border-box;">
+                            <div style="color: #2196F3; font-weight: bold; margin-bottom: 5px;">🤖 KMRL Assistant</div>
+                            <div style="color: rgba(255,255,255,0.9);">Hello! I have access to all KMRL documents. Ask me anything about safety protocols, HR policies, engineering specifications, or any other document-related queries.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-container" style="display: flex; gap: 10px; flex-shrink: 0; margin-top: auto; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
+                    <select id="chatRole" style="padding: 12px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 5px; color: white;">
+                        <option value="Admin">Admin</option>
+                        <option value="Engineer">Engineer</option>
+                        <option value="HR">HR</option>
+                        <option value="Safety">Safety Officer</option>
+                        <option value="Manager">Manager</option>
+                        <option value="Operations">Operations</option>
+                    </select>
+                    <input type="text" id="chatInput" placeholder="Type your question here..." 
+                           style="flex: 1; padding: 12px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 5px; color: white;"
+                           onkeypress="if(event.key === 'Enter') sendChatMessage()">
+                    <button onclick="sendChatMessage()" style="padding: 12px 24px; background: linear-gradient(135deg, #2196F3, #1976D2); color: white; border: none; border-radius: 5px; cursor: pointer;">
+                        Send 📤
+                    </button>
+                    <button onclick="indexDocuments()" style="padding: 12px 24px; background: linear-gradient(135deg, #4CAF50, #45a049); color: white; border: none; border-radius: 5px; cursor: pointer;" title="Index all documents for better search">
+                        🔍 Index Docs
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Chat Button -->
+    <button id="chatButton" onclick="openRAGChat()" style="position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #2196F3, #1976D2); color: white; border: none; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; font-size: 24px; z-index: 1000;">
+        💬
+    </button>
+    
+    <script>
+        // RAG Chat System
+        let chatHistory = [];
+        
+        function openRAGChat() {
+            document.getElementById('ragChatModal').style.display = 'block';
+            document.getElementById('chatInput').focus();
+            
+            // Add scroll event listener
+            const container = document.getElementById('chatContainer');
+            container.addEventListener('scroll', checkScrollPosition);
+            
+            // Initial scroll check
+            setTimeout(checkScrollPosition, 100);
+        }
+        
+        function closeRAGChat() {
+            document.getElementById('ragChatModal').style.display = 'none';
+        }
+        
+        async function indexDocuments() {
+            const button = event.target;
+            button.disabled = true;
+            
+            // Add Gemini-style loading to button
+            button.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <div class="gemini-loader" style="width: 20px; height: 20px;">
+                        <svg class="loader-svg" viewBox="0 0 100 100">
+                            <path class="line" d="M20,50 Q30,20 50,50 T80,50" />
+                            <path class="line" d="M15,60 Q25,30 45,60 T75,60" />
+                            <path class="line" d="M25,40 Q35,10 55,40 T85,40" />
+                        </svg>
+                    </div>
+                    <span>Indexing...</span>
+                </div>
+            `;
+            
+            try {
+                const response = await fetch('/index-documents', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'}
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    addSystemMessage(`✅ Successfully indexed ${result.indexed.length} documents into the knowledge base.`);
+                    // Refresh document display to show newly indexed documents
+                    loadReports();
+                    updateDashboardStats();
+                } else {
+                    addSystemMessage(`❌ Error indexing documents: ${result.error}`);
+                }
+            } catch (error) {
+                addSystemMessage(`❌ Error: ${error.message}`);
+            }
+            
+            button.disabled = false;
+            button.innerHTML = '🔍 Index Docs';
+        }
+        
+        async function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const role = document.getElementById('chatRole').value;
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message to chat
+            addUserMessage(message);
+            input.value = '';
+            
+            // Add to history
+            chatHistory.push({role: 'user', content: message});
+            
+            // Show typing indicator
+            const typingId = addTypingIndicator();
+            
+            try {
+                const response = await fetch('/rag-chat-stream', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        query: message,
+                        role: role,
+                        conversation_history: chatHistory.slice(-6) // Send last 6 messages for context
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                removeTypingIndicator(typingId);
+                
+                // Create streaming message container
+                const streamingMessageId = startStreamingMessage();
+                let fullResponse = '';
+                let sources = [];
+                
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                
+                while (true) {
+                    const { done, value } = await reader.read();
+                    
+                    if (done) {
+                        break;
+                    }
+                    
+                    const chunk = decoder.decode(value, { stream: true });
+                    const lines = chunk.split('\n');
+                    
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            try {
+                                const data = JSON.parse(line.slice(6));
+                                
+                                if (data.type === 'start') {
+                                    sources = data.sources || [];
+                                } else if (data.type === 'chunk') {
+                                    fullResponse += data.content;
+                                    updateStreamingMessage(streamingMessageId, fullResponse);
+                                } else if (data.type === 'end') {
+                                    finishStreamingMessage(streamingMessageId, fullResponse, sources);
+                                } else if (data.type === 'error') {
+                                    removeStreamingMessage(streamingMessageId);
+                                    addSystemMessage(`❌ Error: ${data.error}`);
+                                    return;
+                                }
+                            } catch (e) {
+                                console.warn('Failed to parse SSE data:', line);
+                            }
+                        }
+                    }
+                }
+                
+                // Update chat history
+                chatHistory.push({role: 'assistant', content: fullResponse});
+                
+            } catch (error) {
+                removeTypingIndicator(typingId);
+                addSystemMessage(`❌ Error: ${error.message}`);
+            }
+        }
+        
+        function addUserMessage(message) {
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            const uniqueId = 'user-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+            messageDiv.id = uniqueId;
+            messageDiv.className = 'chat-message user';
+            messageDiv.style.cssText = 'background: rgba(76, 175, 80, 0.1); padding: 15px; border-radius: 10px; align-self: flex-end; max-width: 70%; word-wrap: break-word; overflow-wrap: break-word; white-space: pre-wrap; box-sizing: border-box; margin-bottom: 15px;';
+            messageDiv.innerHTML = `
+                <div style="color: #4CAF50; font-weight: bold; margin-bottom: 5px;">👤 You</div>
+                <div style="color: rgba(255,255,255,0.9); line-height: 1.4;">${escapeHtml(message)}</div>
+            `;
+            messagesDiv.appendChild(messageDiv);
+            scrollToBottom();
+            setTimeout(checkScrollPosition, 200);
+        }
+        
+        function addAssistantMessage(message, sources) {
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            const uniqueId = 'assistant-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+            messageDiv.id = uniqueId;
+            messageDiv.className = 'chat-message assistant';
+            messageDiv.style.cssText = 'background: rgba(33, 150, 243, 0.1); padding: 15px; border-radius: 10px; max-width: 85%; word-wrap: break-word; overflow-wrap: break-word; white-space: pre-wrap; box-sizing: border-box; hyphens: auto; margin-bottom: 15px;';
+            
+            let sourcesHtml = '';
+            if (sources && sources.length > 0) {
+                sourcesHtml = `<div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
+                    <div style="color: rgba(255,255,255,0.5); font-size: 12px;">📄 Sources: ${sources.map(s => s.document).join(', ')}</div>
+                </div>`;
+            }
+            
+            messageDiv.innerHTML = `
+                <div style="color: #2196F3; font-weight: bold; margin-bottom: 5px;">🤖 KMRL Assistant</div>
+                <div style="color: rgba(255,255,255,0.9);">${formatMessage(message)}</div>
+                ${sourcesHtml}
+            `;
+            messagesDiv.appendChild(messageDiv);
+            scrollToBottom();
+            setTimeout(checkScrollPosition, 200);
+        }
+        
+        function addSystemMessage(message) {
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chat-message system';
+            messageDiv.style.cssText = 'background: rgba(255, 152, 0, 0.1); padding: 10px; border-radius: 10px; text-align: center; word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; box-sizing: border-box;';
+            messageDiv.innerHTML = `<div style="color: #FF9800; font-size: 14px;">${message}</div>`;
+            messagesDiv.appendChild(messageDiv);
+            scrollToBottom();
+            setTimeout(checkScrollPosition, 200);
+        }
+        
+        function addTypingIndicator() {
+            const messagesDiv = document.getElementById('chatMessages');
+            const typingDiv = document.createElement('div');
+            const id = 'typing-' + Date.now();
+            typingDiv.id = id;
+            typingDiv.className = 'typing-indicator';
+            
+            typingDiv.innerHTML = `
+                <div class="gemini-loader">
+                    <svg class="loader-svg" viewBox="0 0 100 100">
+                        <path class="line" d="M20,50 Q30,20 50,50 T80,50" />
+                        <path class="line" d="M15,60 Q25,30 45,60 T75,60" />
+                        <path class="line" d="M25,40 Q35,10 55,40 T85,40" />
+                        <path class="line" d="M10,70 Q20,40 40,70 T70,70" />
+                        <path class="line" d="M30,30 Q40,0 60,30 T90,30" />
+                    </svg>
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <div style="color: #2196F3; font-weight: bold; margin-bottom: 5px;">🤖 KMRL Assistant</div>
+                    <div style="color: rgba(255,255,255,0.6); font-size: 14px;">Analyzing documents...</div>
+                </div>
+            `;
+            
+            messagesDiv.appendChild(typingDiv);
+            scrollToBottom();
+            return id;
+        }
+        
+        function removeTypingIndicator(id) {
+            const element = document.getElementById(id);
+            if (element) element.remove();
+        }
+        
+        function formatMessage(message) {
+            // Convert markdown-like formatting to HTML and handle line breaks
+            return message
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/\n/g, '<br>')
+                // Break very long words
+                .replace(/(\S{30,})/g, '<span style="word-break: break-all;">$1</span>');
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function scrollToBottom() {
+            const container = document.getElementById('chatContainer');
+            setTimeout(() => {
+                container.scrollTop = container.scrollHeight;
+            }, 100); // Small delay to ensure content is rendered
+        }
+        
+        // Add scroll indicator for better UX
+        function checkScrollPosition() {
+            const container = document.getElementById('chatContainer');
+            const isAtBottom = container.scrollTop + container.clientHeight >= container.scrollHeight - 10;
+            
+            // Show/hide scroll-to-bottom button if needed
+            let scrollButton = document.getElementById('scrollToBottomBtn');
+            if (!isAtBottom && container.scrollHeight > container.clientHeight) {
+                if (!scrollButton) {
+                    scrollButton = document.createElement('button');
+                    scrollButton.id = 'scrollToBottomBtn';
+                    scrollButton.innerHTML = '↓';
+                    scrollButton.style.cssText = `
+                        position: absolute;
+                        bottom: 80px;
+                        right: 30px;
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        background: rgba(33, 150, 243, 0.8);
+                        color: white;
+                        border: none;
+                        font-size: 18px;
+                        cursor: pointer;
+                        z-index: 1000;
+                        opacity: 0.8;
+                        transition: opacity 0.3s;
+                    `;
+                    scrollButton.onclick = () => {
+                        scrollToBottom();
+                        scrollButton.remove();
+                    };
+                    document.body.appendChild(scrollButton);
+                }
+            } else if (scrollButton) {
+                scrollButton.remove();
+            }
+        }
+        
+        // Streaming message functions
+        function startStreamingMessage() {
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            const id = 'streaming-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+            messageDiv.id = id;
+            messageDiv.className = 'chat-message assistant';
+            messageDiv.style.cssText = 'background: rgba(33, 150, 243, 0.1); padding: 15px; border-radius: 10px; max-width: 85%; word-wrap: break-word; overflow-wrap: break-word; white-space: pre-wrap; box-sizing: border-box; hyphens: auto; margin-bottom: 15px;';
+            
+            messageDiv.innerHTML = `
+                <div style="color: #2196F3; font-weight: bold; margin-bottom: 5px;">🤖 KMRL Assistant</div>
+                <div class="streaming-content" style="color: rgba(255,255,255,0.9); line-height: 1.4;"></div>
+                <div class="streaming-cursor" style="display: inline-block; width: 2px; height: 16px; background: #2196F3; animation: blink 1s infinite; margin-left: 2px;">|</div>
+            `;
+            
+            messagesDiv.appendChild(messageDiv);
+            scrollToBottom();
+            return id;
+        }
+        
+        function updateStreamingMessage(id, content) {
+            const messageDiv = document.getElementById(id);
+            if (messageDiv) {
+                const contentDiv = messageDiv.querySelector('.streaming-content');
+                if (contentDiv) {
+                    contentDiv.innerHTML = formatMessage(content);
+                    scrollToBottom();
+                }
+            }
+        }
+        
+        function finishStreamingMessage(id, content, sources) {
+            const messageDiv = document.getElementById(id);
+            if (messageDiv) {
+                // Remove cursor
+                const cursor = messageDiv.querySelector('.streaming-cursor');
+                if (cursor) cursor.remove();
+                
+                // Add sources if available
+                if (sources && sources.length > 0) {
+                    const sourcesHtml = `<div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
+                        <div style="color: rgba(255,255,255,0.5); font-size: 12px;">📄 Sources: ${sources.map(s => s.document).join(', ')}</div>
+                    </div>`;
+                    messageDiv.innerHTML += sourcesHtml;
+                }
+                
+                setTimeout(checkScrollPosition, 200);
+            }
+        }
+        
+        function removeStreamingMessage(id) {
+            const messageDiv = document.getElementById(id);
+            if (messageDiv) {
+                messageDiv.remove();
+            }
+        }
+    </script>
+    
 </body>
 </html>

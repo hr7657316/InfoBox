@@ -1,0 +1,30 @@
+{
+  "original_file": "DOC001_Safety_Bulletin.json",
+  "timestamp": "1758866257.0710905",
+  "extraction_text": "Safety Bulletin: Platform Edge Door Inspection (DOC001) Type: Safety Bulletin Source: Commissioner of Metro Rail Safety (email) Received: 2025-09-01 Deadline: 2025-09-10 Responsible: Station Engineer Priority: High Summary: Mandatory platform edge door inspection across all stations. Report findings and corrective actions within 9 days. Alerts: - Deadline approaching: 2025-09-10 - High risk: passenger safety Traceability: Original source attached. Click 'View Source' in the UI to open the origin",
+  "metadata": {
+    "document_title": "Safety Bulletin: Platform Edge Door Inspection (DOC001)",
+    "from_whom": "Commissioner of Metro Rail Safety",
+    "to_whom": "Station Engineer",
+    "for_whom": "Station Engineer",
+    "date": "2025-09-01",
+    "time": null,
+    "deadline": "2025-09-10",
+    "entities": [
+      "Commissioner of Metro Rail Safety",
+      "Station Engineer",
+      "Platform Edge Door"
+    ],
+    "job_to_do": "Conduct a mandatory inspection of all platform edge doors and report findings and corrective actions by the deadline.",
+    "document_categories": [
+      "Safety Bulletin",
+      "Inspection Directive",
+      "Maintenance"
+    ],
+    "intended_audiences": [
+      "Station Engineers",
+      "Maintenance Staff",
+      "Safety Officers"
+    ]
+  }
+}

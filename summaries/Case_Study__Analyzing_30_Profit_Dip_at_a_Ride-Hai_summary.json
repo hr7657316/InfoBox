@@ -1,0 +1,13 @@
+{
+  "original_file": "Case_Study__Analyzing_30_Profit_Dip_at_a_Ride-Hai.json",
+  "timestamp": "1758832241.4608955",
+  "summary": "This case study analyzes a 30% profit dip experienced by a ride-hailing startup in India during Q4 2024. The decline is attributed to a combination of internal and external factors, primarily a sharp increase in customer churn from 12% to 28%, a rise in cancellation rates from 20% to 34%, and poor active driver retention. Operational inefficiencies worsened, with booking success rates dropping and customer wait times increasing. The analysis identifies poor driver retention strategies, app-related technology issues, and supply-demand mismatches as critical internal problems that require immediate attention, alongside external pressures like fuel price hikes and increased competition.",
+  "malayalam_summary": "ഇന്ത്യയിലെ ഒരു റൈഡ്-ഹെയ്ലിംഗ് സ്റ്റാർട്ടപ്പിന് 2024-ലെ നാലാം പാദത്തിൽ (Q4) ലാഭത്തിൽ 30% ഇടിവ് സംഭവിച്ചതിനെക്കുറിച്ചുള്ള ഒരു കേസ് സ്റ്റഡിയാണിത്. ഉപഭോക്താക്കളുടെ കൊഴിഞ്ഞുപോക്ക് 12%-ൽ നിന്ന് 28% ആയി ഉയർന്നതും, റദ്ദാക്കൽ നിരക്കുകൾ 20%-ൽ നിന്ന് 34% ആയി വർധിച്ചതും, ഡ്രൈവർമാരെ നിലനിർത്തുന്നതിലെ പരാജയവുമാണ് ഈ ഇടിവിന് പ്രധാന കാരണം. ബുക്കിംഗ് വിജയനിരക്ക് കുറയുകയും ഉപഭോക്താക്കളുടെ കാത്തിരിപ്പ് സമയം കൂടുകയും ചെയ്തതോടെ പ്രവർത്തനക്ഷമതയും മോശമായി. ഡ്രൈവർമാരെ നിലനിർത്തുന്നതിലെ പിഴവുകൾ, ആപ്പിലെ സാങ്കേതിക പ്രശ്നങ്ങൾ, ഡിമാൻഡ്-സപ്ലൈയിലെ പൊരുത്തക്കേടുകൾ തുടങ്ങിയ ആഭ്യന്തര പ്രശ്‌നങ്ങൾക്ക് അടിയന്തര ശ്രദ്ധ ആവശ്യമാണെന്ന് ഈ വിശകലനം വ്യക്തമാക്കുന്നു. ഇന്ധനവില വർധനയും വർധിച്ച മത്സരവും പോലുള്ള ബാഹ്യ സമ്മർദ്ദങ്ങളും ഇതിന് കാരണമായി.",
+  "key_points": [
+    "A ride-hailing startup's profit dropped by 30% in Q4 2024, with profit margin falling from 20% in Q3 to 12.5%.",
+    "The primary causes identified are increased customer churn (from 12% to 28%) and high cancellation rates (from 20% to 34%).",
+    "Driver retention and operational metrics significantly declined, including a drop in driver acceptance rate from 85% to 65% and an increase in average wait time from 8 to 12 minutes.",
+    "Root causes are categorized as both external (fuel prices, competition) and critical internal factors (poor driver retention, technology issues, operational mismatch).",
+    "The analysis covers four key cities (Delhi, Mumbai, Bangalore, Kolkata), with Mumbai showing the highest revenue drop (35%) and customer churn (32%)."
+  ]
+}

@@ -1,0 +1,194 @@
+[
+  {
+    "type": "Title",
+    "element_id": "5da862ca6d4fa11ca70c9f672ec29601",
+    "text": "Invoice: Spare Parts Supplier - Invoice #4521 (DOCO002)",
+    "metadata": {
+      "filetype": "image/png",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC002_Vendor_Invoice.png"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "5e133b2a3ab56e40bfd6024a9a27bb53",
+    "text": "Type: Vendor Invoice",
+    "metadata": {
+      "filetype": "image/png",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "5da862ca6d4fa11ca70c9f672ec29601",
+      "filename": "DOC002_Vendor_Invoice.png"
+    }
+  },
+  {
+    "type": "UncategorizedText",
+    "element_id": "ccfe503206bd9699d10afba815c61722",
+    "text": "|",
+    "metadata": {
+      "filetype": "image/png",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "5da862ca6d4fa11ca70c9f672ec29601",
+      "filename": "DOC002_Vendor_Invoice.png"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "70a6430c35ae70774b38b29b52aae08b",
+    "text": "Priority: Medium",
+    "metadata": {
+      "filetype": "image/png",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "5da862ca6d4fa11ca70c9f672ec29601",
+      "filename": "DOC002_Vendor_Invoice.png"
+    }
+  },
+  {
+    "type": "UncategorizedText",
+    "element_id": "31584e9d6fd27172cdedc9f55fc38693",
+    "text": "|",
+    "metadata": {
+      "filetype": "image/png",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "5da862ca6d4fa11ca70c9f672ec29601",
+      "filename": "DOC002_Vendor_Invoice.png"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "f5bd1713155752070f5d83e5f04c46e5",
+    "text": "Responsible: Finance Officer",
+    "metadata": {
+      "filetype": "image/png",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "5da862ca6d4fa11ca70c9f672ec29601",
+      "filename": "DOC002_Vendor_Invoice.png"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "bc25de83e457ac4b24e6168657d69763",
+    "text": "Summary:",
+    "metadata": {
+      "filetype": "image/png",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC002_Vendor_Invoice.png"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "6f40e97f737d4321afb9e91f6869736a",
+    "text": "Invoice for supply of brake pads for 12 coaches. Total amount: INR 1,250,000. Verify PO and schedule payment.",
+    "metadata": {
+      "filetype": "image/png",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "bc25de83e457ac4b24e6168657d69763",
+      "filename": "DOC002_Vendor_Invoice.png"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "9d044b197e9b05fd5d071a2b4e1f7d8e",
+    "text": "Alerts:",
+    "metadata": {
+      "filetype": "image/png",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC002_Vendor_Invoice.png"
+    }
+  },
+  {
+    "type": "UncategorizedText",
+    "element_id": "20c24e00989685054dce767cca06e982",
+    "text": "-",
+    "metadata": {
+      "filetype": "image/png",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "9d044b197e9b05fd5d071a2b4e1f7d8e",
+      "filename": "DOC002_Vendor_Invoice.png"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "ebfa356cc03ba8ade8f867bc5afdd9e3",
+    "text": "Pending verification",
+    "metadata": {
+      "filetype": "image/png",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "9d044b197e9b05fd5d071a2b4e1f7d8e",
+      "filename": "DOC002_Vendor_Invoice.png"
+    }
+  },
+  {
+    "type": "UncategorizedText",
+    "element_id": "694d167d31c058de29cf4f6502b7ca83",
+    "text": "-",
+    "metadata": {
+      "filetype": "image/png",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "9d044b197e9b05fd5d071a2b4e1f7d8e",
+      "filename": "DOC002_Vendor_Invoice.png"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "5f9edbfa5a828e75b44ccab2ef244fe2",
+    "text": "Payment due: 2025-09-15",
+    "metadata": {
+      "filetype": "image/png",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "9d044b197e9b05fd5d071a2b4e1f7d8e",
+      "filename": "DOC002_Vendor_Invoice.png"
+    }
+  },
+  {
+    "type": "Footer",
+    "element_id": "0f675d77994c5c4098f549fc8731dec6",
+    "text": "Source: Vendor Mailbox (finance@vendor.com) | Received: 2025-09-02",
+    "metadata": {
+      "filetype": "image/png",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC002_Vendor_Invoice.png"
+    }
+  }
+]

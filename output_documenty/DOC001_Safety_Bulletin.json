@@ -1,0 +1,183 @@
+[
+  {
+    "type": "Title",
+    "element_id": "65055c4c116b07fa3f65f5f51abe0fa1",
+    "text": "Safety Bulletin: Platform Edge Door Inspection (DOC001)",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC001_Safety_Bulletin.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "e987d242d6137a25cdfe37ba6e427981",
+    "text": "Type: Safety Bulletin",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC001_Safety_Bulletin.pdf",
+      "parent_id": "65055c4c116b07fa3f65f5f51abe0fa1"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "6530fad271116beb3595cd83d925fe0d",
+    "text": "Source: Commissioner of Metro Rail Safety (email)",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC001_Safety_Bulletin.pdf",
+      "parent_id": "65055c4c116b07fa3f65f5f51abe0fa1"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "6eb4018ba663dfadec3156dc378faa9f",
+    "text": "Received: 2025-09-01",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC001_Safety_Bulletin.pdf",
+      "parent_id": "65055c4c116b07fa3f65f5f51abe0fa1"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "248acca9fb8451138f107a33bf420a41",
+    "text": "Deadline: 2025-09-10",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC001_Safety_Bulletin.pdf",
+      "parent_id": "65055c4c116b07fa3f65f5f51abe0fa1"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "5d89232caaafb83abe4b3e0ecfd42350",
+    "text": "Responsible: Station Engineer",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC001_Safety_Bulletin.pdf",
+      "parent_id": "65055c4c116b07fa3f65f5f51abe0fa1"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "b14f095e9942f4526b373b16b7a911c0",
+    "text": "Priority: High",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC001_Safety_Bulletin.pdf",
+      "parent_id": "65055c4c116b07fa3f65f5f51abe0fa1"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "6e0d59751f59c708a88a9e943744d6a0",
+    "text": "Summary:",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC001_Safety_Bulletin.pdf",
+      "parent_id": "65055c4c116b07fa3f65f5f51abe0fa1"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "6ea7f37c7738b4ca693f78de80064c25",
+    "text": "Mandatory platform edge door inspection across all stations. Report findings and corrective actions within 9 days.",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC001_Safety_Bulletin.pdf",
+      "parent_id": "65055c4c116b07fa3f65f5f51abe0fa1"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "8d9e9d608bf7f1728b64b23efc21b7a4",
+    "text": "Alerts:",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC001_Safety_Bulletin.pdf",
+      "parent_id": "65055c4c116b07fa3f65f5f51abe0fa1"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "4c4a1208604c8d002aa1818b5c34e9c2",
+    "text": "- Deadline approaching: 2025-09-10",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC001_Safety_Bulletin.pdf",
+      "parent_id": "65055c4c116b07fa3f65f5f51abe0fa1"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "f4d04183c3d3a5dcb02168effaf20088",
+    "text": "- High risk: passenger safety",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC001_Safety_Bulletin.pdf",
+      "parent_id": "65055c4c116b07fa3f65f5f51abe0fa1"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "110b643fcf4a478327f55efe61209c79",
+    "text": "Traceability: Original source attached. Click 'View Source' in the UI to open the original file and highlighted section.",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC001_Safety_Bulletin.pdf",
+      "parent_id": "65055c4c116b07fa3f65f5f51abe0fa1"
+    }
+  }
+]

@@ -1,0 +1,183 @@
+[
+  {
+    "type": "Title",
+    "element_id": "b319778c553798169428a1382399bf7d",
+    "text": "Design Change: Bogie Mounting Bracket (v2.1) (DOC003)",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC003_Design_Change_Notice.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "ccaa3ac417fbff8996865c03361ecdfc",
+    "text": "Type: Design Change Notice",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC003_Design_Change_Notice.pdf",
+      "parent_id": "b319778c553798169428a1382399bf7d"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "59fc9aa368477139ce97cbd5ed76e69b",
+    "text": "Source: Engineering SharePoint",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC003_Design_Change_Notice.pdf",
+      "parent_id": "b319778c553798169428a1382399bf7d"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "5b8cbd79f4e94125b3ec69e3712af72b",
+    "text": "Received: 2025-09-03",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC003_Design_Change_Notice.pdf",
+      "parent_id": "b319778c553798169428a1382399bf7d"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "6c159c760dba9980f5705f4cab42f5f4",
+    "text": "Deadline: 2025-09-30",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC003_Design_Change_Notice.pdf",
+      "parent_id": "b319778c553798169428a1382399bf7d"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "c54a25b9202ac29b2a82eb6bd973502b",
+    "text": "Responsible: Procurement & Rolling Stock Engineer",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC003_Design_Change_Notice.pdf",
+      "parent_id": "b319778c553798169428a1382399bf7d"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "2f3daf5018f37bd419778b11077866bc",
+    "text": "Priority: High",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC003_Design_Change_Notice.pdf",
+      "parent_id": "b319778c553798169428a1382399bf7d"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "bd655466b4d288505bd390bb1a1d3cc2",
+    "text": "Summary:",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC003_Design_Change_Notice.pdf",
+      "parent_id": "b319778c553798169428a1382399bf7d"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "a7432c86524d0c1753d1e3d989185c82",
+    "text": "Engineering has approved a design modification to the bogie mounting bracket. Procurement to halt new orders",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC003_Design_Change_Notice.pdf",
+      "parent_id": "b319778c553798169428a1382399bf7d"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "2414c50ee139bc3a45e5dc8614c77570",
+    "text": "Alerts:",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC003_Design_Change_Notice.pdf",
+      "parent_id": "b319778c553798169428a1382399bf7d"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "09eba5e83e26c3c2aa277fe070db9e42",
+    "text": "- Action: Halt procurement until spec confirmed",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC003_Design_Change_Notice.pdf",
+      "parent_id": "b319778c553798169428a1382399bf7d"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "2cc2b0609e709583b3e03c61ece0809f",
+    "text": "- Coordination required with Procurement",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC003_Design_Change_Notice.pdf",
+      "parent_id": "b319778c553798169428a1382399bf7d"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "bdc8d7cd3329773e8540c699cc122198",
+    "text": "Traceability: Original source attached. Click 'View Source' in the UI to open the original file and highlighted section.",
+    "metadata": {
+      "filetype": "application/pdf",
+      "languages": [
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "DOC003_Design_Change_Notice.pdf",
+      "parent_id": "b319778c553798169428a1382399bf7d"
+    }
+  }
+]

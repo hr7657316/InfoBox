@@ -16,12 +16,6 @@ load_dotenv()
 class EmailService:
     def __init__(self):
         """Initialize email service with SMTP configuration"""
-        # Reload environment variables each time
-        load_dotenv(override=True)
-        self._load_config()
-    
-    def _load_config(self):
-        """Load configuration from environment variables"""
         self.smtp_server = os.getenv("SMTP_SERVER", "smtp.gmail.com")
         self.smtp_port = int(os.getenv("SMTP_PORT", "587"))
         self.email_user = os.getenv("EMAIL_USER")
@@ -42,10 +36,6 @@ class EmailService:
     
     def get_recipients_from_metadata(self, metadata):
         """Extract recipient emails based on metadata intended audiences"""
-        # Reload config to get latest email addresses
-        load_dotenv(override=True)
-        self._load_config()
-        
         recipients = []
         intended_audiences = metadata.get('intended_audiences', [])
         document_categories = metadata.get('document_categories', [])

@@ -1,0 +1,32 @@
+{
+  "original_file": "DOC004_HR_Notice.json",
+  "timestamp": "1758832244.209362",
+  "extraction_text": "Refresher Training: Fire Safety & Evacuation (DOC004) Type: HR Notice Source: HR Portal (hr@kmrl.in) Received: 2025-09-04 Deadline: 2025-09-20 Responsible: HR Manager Priority: Low Summary: Mandatory refresher training for station staff on fire safety procedures. Schedule sessions and collect acknowledgments. Alerts: - Attendance required - Deadline for completion: 2025-09-20 Traceability: Original source attached. Click 'View Source' in the UI to open the original file and highlighted section.",
+  "metadata": {
+    "document_title": "Refresher Training: Fire Safety & Evacuation (DOC004)",
+    "from_whom": "HR Portal (hr@kmrl.in)",
+    "to_whom": "HR Manager",
+    "for_whom": "Station Staff",
+    "date": "2025-09-04",
+    "time": null,
+    "deadline": "2025-09-20",
+    "entities": [
+      "KMRL",
+      "HR Portal",
+      "HR Manager",
+      "Station Staff"
+    ],
+    "job_to_do": "Schedule mandatory fire safety and evacuation refresher training sessions for station staff and collect their acknowledgments.",
+    "document_categories": [
+      "HR Notice",
+      "Training",
+      "Safety"
+    ],
+    "intended_audiences": [
+      "HR Manager",
+      "Station Staff"
+    ]
+  },
+  "compliance_status": "completed",
+  "last_updated": "2025-09-26T04:26:22.324426"
+}
