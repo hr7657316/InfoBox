@@ -1,0 +1,17 @@
+{
+  "id": "33C15066",
+  "department": "procurement",
+  "department_name": "Procurement Department",
+  "title": "Spare parts procurement delay",
+  "description": "Critical spare parts for train maintenance ordered 2 weeks ago have not arrived. Need urgent follow-up with vendor.",
+  "priority": "medium",
+  "category": "resource",
+  "raised_by": "Mike Davis",
+  "contact": "+91-9876543212",
+  "timestamp": "2025-09-26T14:40:27.689799",
+  "status": "pending",
+  "assigned_to": null,
+  "resolution": null,
+  "resolved_at": null,
+  "attachments": []
+}

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Department Dashboard - Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            border-radius: 5px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .message {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .success {
+            background: rgba(76, 175, 80, 0.3);
+            border: 1px solid #4CAF50;
+        }
+        .error {
+            background: rgba(244, 67, 54, 0.3);
+            border: 1px solid #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>RMS Query Submission - Test</h1>
+        
+        <div id="message"></div>
+        
+        <form id="testForm">
+            <div class="form-group">
+                <label>Department:</label>
+                <select id="department" required>
+                    <option value="">Select Department</option>
+                    <option value="engineering">Engineering</option>
+                    <option value="procurement">Procurement</option>
+                    <option value="hr">Human Resources</option>
+                    <option value="safety">Safety</option>
+                    <option value="finance">Finance</option>
+                    <option value="operations">Operations</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Title:</label>
+                <input type="text" id="title" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Description:</label>
+                <textarea id="description" rows="4" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Category:</label>
+                <select id="category" required>
+                    <option value="general">General</option>
+                    <option value="technical">Technical</option>
+                    <option value="safety">Safety</option>
+                    <option value="maintenance">Maintenance</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Priority:</label>
+                <select id="priority" required>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                    <option value="critical">Critical</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Your Name:</label>
+                <input type="text" id="raised_by" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Contact:</label>
+                <input type="text" id="contact">
+            </div>
+            
+            <button type="submit">Submit Query</button>
+        </form>
+        
+        <h2>Recent Queries</h2>
+        <div id="queries"></div>
+    </div>
+    
+    <script>
+        document.getElementById('testForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const messageDiv = document.getElementById('message');
+            
+            const data = {
+                department: document.getElementById('department').value,
+                title: document.getElementById('title').value,
+                description: document.getElementById('description').value,
+                category: document.getElementById('category').value,
+                priority: document.getElementById('priority').value,
+                raised_by: document.getElementById('raised_by').value,
+                contact: document.getElementById('contact').value
+            };
+            
+            console.log('Submitting:', data);
+            
+            try {
+                const response = await fetch('/raise-query', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                console.log('Result:', result);
+                
+                if (result.success) {
+                    messageDiv.innerHTML = `<div class="message success">✅ Query ${result.query_id} submitted successfully!</div>`;
+                    document.getElementById('testForm').reset();
+                    loadQueries();
+                } else {
+                    messageDiv.innerHTML = `<div class="message error">❌ Error: ${result.error}</div>`;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                messageDiv.innerHTML = `<div class="message error">❌ Error: ${error.message}</div>`;
+            }
+        });
+        
+        async function loadQueries() {
+            try {
+                const response = await fetch('/get-all-queries');
+                const result = await response.json();
+                
+                if (result.success) {
+                    const queriesDiv = document.getElementById('queries');
+                    queriesDiv.innerHTML = result.queries.slice(0, 5).map(q => `
+                        <div style="background: rgba(255,255,255,0.1); padding: 10px; margin-bottom: 10px; border-radius: 5px;">
+                            <strong>${q.id}</strong>: ${q.title} (${q.department})
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('Error loading queries:', error);
+            }
+        }
+        
+        // Load queries on page load
+        loadQueries();
+    </script>
+</body>
+</html>

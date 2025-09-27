@@ -11,6 +11,7 @@ from gemini_service import GeminiService
 from metadata_extractor import MetadataExtractor
 from email_service import EmailService
 from rag_system import RAGSystem
+from confidence_scorer import ConfidenceScorer
 
 # Load environment variables
 load_dotenv()
@@ -28,14 +29,16 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 
 # Allowed file extensions
 ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg', 'gif', 'tiff', 'bmp', 'doc', 'docx', 'txt'}
-
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/')
 def index():
-    """Main UI"""
     return render_template('index.html')
+
+@app.route('/test')
+def test():
+    return send_file('test_cors.html')
 
 @app.route('/upload', methods=['POST'])
 def upload_files():
@@ -1177,6 +1180,72 @@ def update_action_status():
             'message': f'Status updated to {new_status}',
             'filename': filename,
             'new_status': new_status
+        })
+        
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/calculate-confidence/<filename>')
+def calculate_confidence(filename):
+    """Calculate automatic confidence score for a document"""
+    try:
+        input_dir = Path(app.config['INPUT_FOLDER'])
+        output_dir = Path(app.config['OUTPUT_FOLDER'])
+        
+        # Find original PDF file
+        base_name = filename.replace('.json', '')
+        original_file = None
+        
+        # Look for PDF with same base name
+        for ext in ['.pdf', '.PDF']:
+            pdf_path = input_dir / f"{base_name}{ext}"
+            if pdf_path.exists():
+                original_file = pdf_path
+                break
+        
+        if not original_file:
+            return jsonify({
+                'success': False, 
+                'error': 'Original PDF file not found'
+            }), 404
+        
+        # Find processed JSON file
+        json_path = output_dir / filename
+        if not json_path.exists():
+            return jsonify({
+                'success': False, 
+                'error': 'Processed JSON file not found'
+            }), 404
+        
+        # Initialize confidence scorer
+        scorer = ConfidenceScorer()
+        
+        # Calculate confidence score
+        result = scorer.calculate_confidence_score(str(original_file), str(json_path))
+        
+        if 'error' in result:
+            return jsonify({
+                'success': False, 
+                'error': result['error']
+            }), 500
+        
+        # Get confidence category
+        category, color = scorer.get_confidence_category(result['overall_score'])
+        
+        return jsonify({
+            'success': True,
+            'filename': filename,
+            'confidence': {
+                'overall_score': result['overall_score'],
+                'category': category,
+                'color': color,
+                'metrics': {
+                    'text_similarity': result['text_similarity'],
+                    'sequence_similarity': result['sequence_similarity'],
+                    'content_coverage': result['content_coverage']
+                },
+                'details': result['details']
+            }
         })
         
     except Exception as e:

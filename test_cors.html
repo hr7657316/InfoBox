@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CORS Test</title>
+</head>
+<body>
+    <h1>Testing CORS</h1>
+    <button onclick="testFetch()">Test Fetch</button>
+    <pre id="result"></pre>
+    
+    <script>
+        async function testFetch() {
+            try {
+                console.log('Fetching from http://127.0.0.1:8081/get-all-queries');
+                const response = await fetch('http://127.0.0.1:8081/get-all-queries');
+                const data = await response.json();
+                document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+                console.log('Success:', data);
+            } catch (error) {
+                document.getElementById('result').textContent = 'Error: ' + error.message;
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</body>
+</html>

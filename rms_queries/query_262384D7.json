@@ -1,0 +1,17 @@
+{
+  "id": "262384D7",
+  "department": "engineering",
+  "department_name": "Engineering Department",
+  "title": "Track maintenance required at Station 5",
+  "description": "Regular inspection revealed wear on Track 3 at Station 5. Immediate maintenance required to prevent service disruption.",
+  "priority": "high",
+  "category": "maintenance",
+  "raised_by": "John Smith",
+  "contact": "+91-9876543210",
+  "timestamp": "2025-09-26T14:39:44.625937",
+  "status": "pending",
+  "assigned_to": null,
+  "resolution": null,
+  "resolved_at": null,
+  "attachments": []
+}

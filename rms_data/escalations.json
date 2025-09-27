@@ -1,0 +1,11 @@
+[
+  {
+    "escalation_id": "ESC-20250926-2A958711",
+    "query_id": "RMS-20250926-FB34FE58",
+    "escalated_from": "Admin",
+    "escalated_to": "HR",
+    "escalation_reason": "Technical complexity beyond admin expertise. Requires specialized technical team review and potential budget approval for system upgrades.",
+    "escalation_date": "2025-09-26T13:27:25.437643",
+    "status": "Pending HR Review"
+  }
+]
