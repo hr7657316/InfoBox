@@ -1,0 +1,11 @@
+{
+  "id": "COMP002",
+  "title": "Environmental Impact Report",
+  "department": "operations",
+  "type": "Environmental Compliance",
+  "priority": "high",
+  "deadline": "2025-10-18T15:31:35.480786",
+  "status": "upcoming",
+  "description": "Quarterly environmental impact assessment report",
+  "regulation": "Environmental Protection Act"
+}

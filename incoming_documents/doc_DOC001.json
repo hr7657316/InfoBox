@@ -1,0 +1,15 @@
+{
+  "id": "DOC001",
+  "title": "Safety Protocol Update - Platform Operations",
+  "sender": "Safety Department",
+  "type": "Safety Circular",
+  "priority": "high",
+  "received_date": "2025-10-02T15:31:35.480765",
+  "deadline": "2025-10-10T15:31:35.480773",
+  "status": "pending",
+  "relevant_departments": [
+    "engineering",
+    "operations"
+  ],
+  "description": "Updated safety protocols for platform operations during peak hours"
+}

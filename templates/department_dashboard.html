@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KMRL Department Portal - RMS Query System</title>
+    <title>KMRL Department Dashboard - Comprehensive Portal</title>
     <style>
         * {
             margin: 0;
@@ -14,28 +14,33 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            height: 100vh;
             color: white;
+            overflow: hidden;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 10px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         .header {
             background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
             text-align: center;
+            flex-shrink: 0;
         }
 
         .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            font-size: 1.8em;
+            margin-bottom: 5px;
             background: linear-gradient(135deg, #FFD700, #FFA500);
             -webkit-background-clip: text;
             background-clip: text;
@@ -44,16 +49,17 @@
 
         .department-selector {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-shrink: 0;
         }
 
         .dept-card {
             background: rgba(255, 255, 255, 0.1);
             border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            padding: 15px;
+            border-radius: 8px;
+            padding: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: center;
@@ -72,28 +78,559 @@
         }
 
         .dept-icon {
-            font-size: 2em;
-            margin-bottom: 10px;
+            font-size: 1.5em;
+            margin-bottom: 5px;
         }
 
-        .main-content {
+        /* Dashboard Grid Layout */
+        .dashboard-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            grid-template-rows: 1fr 1fr;
+            gap: 10px;
+            flex: 1;
+            height: calc(100vh - 200px);
         }
 
-        .query-form-section, .queries-list-section {
+        /* Section Cards */
+        .section-card {
             background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 25px;
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
         }
 
         .section-title {
-            font-size: 1.5em;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        /* Incoming Documents Section */
+        .documents-section {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+        }
+
+        .document-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            padding: 8px;
+            margin-bottom: 6px;
+            border-left: 3px solid #4ECDC4;
+            transition: all 0.3s ease;
+        }
+
+        .document-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .document-item.high { border-left-color: #FF6B6B; }
+        .document-item.medium { border-left-color: #FFD93D; }
+        .document-item.low { border-left-color: #6BCF7F; }
+
+        .document-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .document-title {
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 0.9em;
+        }
+
+        .document-priority {
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            font-weight: 600;
+        }
+
+        .document-priority.high {
+            background: rgba(255, 107, 107, 0.2);
+            color: #FF6B6B;
+        }
+
+        .document-priority.medium {
+            background: rgba(255, 217, 61, 0.2);
+            color: #FFD93D;
+        }
+
+        .document-priority.low {
+            background: rgba(107, 207, 127, 0.2);
+            color: #6BCF7F;
+        }
+
+        .document-meta {
+            font-size: 0.7em;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 4px;
+        }
+
+        .document-description {
+            font-size: 0.75em;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.2;
+        }
+
+        /* Job Cards Section */
+        .jobs-section {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+        }
+
+        .job-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            padding: 8px;
+            margin-bottom: 6px;
+            border-left: 3px solid #667eea;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .job-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .job-item.pending { border-left-color: #FFD93D; }
+        .job-item.in_progress { border-left-color: #6BCF7F; }
+        .job-item.done { border-left-color: #4CAF50; }
+        .job-item.overdue { 
+            border-left-color: #FF6B6B; 
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .job-title {
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 0.9em;
+        }
+
+        .job-status {
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .job-status.pending {
+            background: rgba(255, 217, 61, 0.2);
+            color: #FFD93D;
+        }
+
+        .job-status.in_progress {
+            background: rgba(107, 207, 127, 0.2);
+            color: #6BCF7F;
+        }
+
+        .job-status.done {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+        }
+
+        .job-deadline {
+            font-size: 0.7em;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 4px;
+        }
+
+        .job-deadline.overdue {
+            color: #FF6B6B;
+            font-weight: bold;
+        }
+
+        /* Compliance Alerts Section */
+        .compliance-section {
+            grid-column: 1 / 2;
+            grid-row: 2 / 3;
+        }
+
+        .compliance-item {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-left: 4px solid #BB8FCE;
+            transition: all 0.3s ease;
+        }
+
+        .compliance-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(3px);
+        }
+
+        .compliance-item.overdue { 
+            border-left-color: #FF6B6B; 
+            background: rgba(255, 107, 107, 0.15);
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+        }
+
+        .compliance-item.urgent { 
+            border-left-color: #FF9800; 
+            background: rgba(255, 152, 0, 0.12);
+        }
+
+        .compliance-item.upcoming { 
+            border-left-color: #FFD93D;
+            background: rgba(255, 217, 61, 0.08);
+        }
+        
+        .compliance-item.scheduled { 
+            border-left-color: #6BCF7F;
+            background: rgba(107, 207, 127, 0.08);
+        }
+
+        .compliance-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .compliance-title {
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 0.95em;
+            line-height: 1.3;
+        }
+
+        .compliance-urgency {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .compliance-urgency.critical {
+            background: rgba(255, 107, 107, 0.3);
+            color: #FF6B6B;
+            animation: pulse 2s infinite;
+        }
+
+        .compliance-urgency.high {
+            background: rgba(255, 152, 0, 0.2);
+            color: #FF9800;
+        }
+
+        .compliance-urgency.medium {
+            background: rgba(255, 217, 61, 0.2);
+            color: #FFD93D;
+        }
+
+        .compliance-urgency.low {
+            background: rgba(107, 207, 127, 0.2);
+            color: #6BCF7F;
+        }
+
+        .compliance-meta {
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .compliance-deadline {
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .compliance-days-remaining {
+            color: #FFD93D;
+            font-weight: 600;
+        }
+
+        .compliance-days-remaining.overdue {
+            color: #FF6B6B;
+        }
+
+        .compliance-description {
+            font-size: 0.85em;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.4;
+            margin-top: 8px;
+        }
+
+        /* Enhanced RMS Queries Section */
+        .rms-queries-section {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+        }
+
+        .query-item {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .query-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(2px);
+        }
+
+        .query-item.pending { 
+            border-left-color: #ffbb33;
+            background: rgba(255, 187, 51, 0.08);
+        }
+        
+        .query-item.in_progress { 
+            border-left-color: #00C851;
+            background: rgba(0, 200, 81, 0.08);
+        }
+        
+        .query-item.resolved { 
+            border-left-color: #4CAF50;
+            background: rgba(76, 175, 80, 0.08);
+        }
+
+        .query-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .query-id {
+            font-weight: bold;
+            color: #FFD700;
+            font-size: 0.8em;
+        }
+
+        .query-status {
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .query-status.pending {
+            background: rgba(255, 187, 51, 0.2);
+            color: #ffbb33;
+        }
+
+        .query-status.in_progress {
+            background: rgba(0, 200, 81, 0.2);
+            color: #00C851;
+        }
+
+        .query-status.resolved {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+        }
+
+        .query-title {
+            font-size: 0.95em;
+            margin-bottom: 6px;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .query-meta {
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 8px;
+        }
+
+        .query-responses {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .response-item {
+            background: rgba(76, 236, 196, 0.05);
+            border-radius: 6px;
+            padding: 8px;
+            margin-bottom: 6px;
+            border-left: 3px solid #4ECDC4;
+        }
+
+        .response-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .response-from {
+            font-weight: bold;
+            color: #4ECDC4;
+            font-size: 0.8em;
+        }
+
+        .response-time {
+            font-size: 0.7em;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .response-message {
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.4;
+        }
+
+        /* Utility Classes */
+        .scrollable {
+            flex: 1;
+            overflow-y: auto;
+            min-height: 0;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: rgba(255, 255, 255, 0.5);
+            font-style: italic;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 5px;
             margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            min-width: 300px;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: opacity 0.3s ease;
+        }
+
+        .alert.success {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4CAF50;
+            color: #4CAF50;
+        }
+
+        .alert.error {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid #f44336;
+            color: #f44336;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: slideIn 0.3s ease;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            margin: 3% auto;
+            padding: 0;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            padding: 24px 32px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            color: white;
+            font-size: 1.5em;
+            margin: 0;
+        }
+
+        .close {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .form-group {
@@ -188,154 +725,34 @@
             cursor: not-allowed;
         }
 
-        .query-list {
-            max-height: 500px;
-            overflow-y: auto;
-        }
-
-        .query-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-left: 4px solid #667eea;
-            transition: all 0.3s ease;
-        }
-
-        .query-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .query-item.pending { border-left-color: #ffbb33; }
-        .query-item.in_progress { border-left-color: #00C851; }
-        .query-item.resolved { border-left-color: #4CAF50; }
-
-        .query-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .query-id {
-            font-weight: bold;
-            color: #FFD700;
-            font-size: 0.9em;
-        }
-
-        .query-status {
+        .raise-query-btn {
             padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.85em;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border: none;
+            border-radius: 3px;
+            color: white;
+            font-size: 0.7em;
             font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: auto;
         }
 
-        .query-status.pending {
-            background: rgba(255, 187, 51, 0.2);
-            color: #ffbb33;
+        .raise-query-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
         }
 
-        .query-status.in_progress {
-            background: rgba(0, 200, 81, 0.2);
-            color: #00C851;
-        }
-
-        .query-status.resolved {
-            background: rgba(76, 175, 80, 0.2);
-            color: #4CAF50;
-        }
-
-        .query-title {
-            font-size: 1.1em;
-            margin-bottom: 5px;
-            color: rgba(255, 255, 255, 0.95);
-        }
-
-        .query-meta {
-            font-size: 0.85em;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .alert {
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            display: none;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            min-width: 300px;
-            font-weight: bold;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            transition: opacity 0.3s ease;
-        }
-
-        .alert.success {
-            background: rgba(76, 175, 80, 0.2);
-            border: 1px solid #4CAF50;
-            color: #4CAF50;
-        }
-
-        .alert.error {
-            background: rgba(244, 67, 54, 0.2);
-            border: 1px solid #f44336;
-            color: #f44336;
-        }
-
-        .stats-bar {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 2em;
-            font-weight: bold;
-            color: #FFD700;
-        }
-
-        .stat-label {
-            font-size: 0.9em;
-            color: rgba(255, 255, 255, 0.7);
-            margin-top: 5px;
-        }
-
-        .no-queries {
-            text-align: center;
-            padding: 40px;
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .query-item {
-            animation: slideIn 0.3s ease;
+        form {
+            padding: 32px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🚊 KMRL Department Portal</h1>
-            <p>Railway Management System - Query Submission Interface</p>
+            <h1>🚊 KMRL Department Dashboard</h1>
+            <p>Comprehensive Railway Management System Portal</p>
         </div>
 
         <div id="alertBox" class="alert"></div>
@@ -345,91 +762,105 @@
             <!-- Department cards will be populated here -->
         </div>
 
-        <div class="main-content">
-            <div class="query-form-section">
-                <h2 class="section-title">🚨 Raise New RMS Query</h2>
-                
-                <form id="queryForm">
-                    <div class="form-group">
-                        <label>Query Title *</label>
-                        <input type="text" id="queryTitle" placeholder="Brief description of the issue" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Category *</label>
-                        <select id="queryCategory" required>
-                            <option value="">Select Category</option>
-                            <option value="technical">Technical Issue</option>
-                            <option value="operational">Operational Problem</option>
-                            <option value="safety">Safety Concern</option>
-                            <option value="maintenance">Maintenance Request</option>
-                            <option value="compliance">Compliance Issue</option>
-                            <option value="resource">Resource Request</option>
-                            <option value="training">Training Required</option>
-                            <option value="general">General Query</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Priority Level *</label>
-                        <div class="priority-selector" id="prioritySelector">
-                            <div class="priority-btn low" data-priority="low">Low</div>
-                            <div class="priority-btn medium active" data-priority="medium">Medium</div>
-                            <div class="priority-btn high" data-priority="high">High</div>
-                            <div class="priority-btn critical" data-priority="critical">Critical</div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Detailed Description *</label>
-                        <textarea id="queryDescription" placeholder="Provide detailed information about the query or issue..." required></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Your Name *</label>
-                        <input type="text" id="raisedBy" placeholder="Enter your full name" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Contact Number</label>
-                        <input type="tel" id="contactNumber" placeholder="Your contact number for follow-up">
-                    </div>
-
-                    <button type="submit" class="submit-btn" id="submitBtn">
-                        📤 Submit RMS Query
-                    </button>
-                </form>
+        <!-- Enhanced Dashboard with All New Features -->
+        <div class="dashboard-grid" id="dashboardContent" style="display: none;">
+            <!-- Incoming Documents Section -->
+            <div class="section-card documents-section">
+                <h2 class="section-title">📥 Incoming Documents</h2>
+                <div class="scrollable" id="documentsList">
+                    <div class="loading">Select a department to view documents...</div>
+                </div>
             </div>
 
-            <div class="queries-list-section">
-                <h2 class="section-title">📋 Your Department Queries</h2>
-                
-                <div class="stats-bar" id="statsBar">
-                    <div class="stat-card">
-                        <div class="stat-value" id="totalQueries">0</div>
-                        <div class="stat-label">Total</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="pendingQueries">0</div>
-                        <div class="stat-label">Pending</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="progressQueries">0</div>
-                        <div class="stat-label">In Progress</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="resolvedQueries">0</div>
-                        <div class="stat-label">Resolved</div>
-                    </div>
+            <!-- Job Cards Section -->
+            <div class="section-card jobs-section">
+                <h2 class="section-title">📋 Job Cards & Tasks</h2>
+                <div class="scrollable" id="jobsList">
+                    <div class="loading">Select a department to view job cards...</div>
                 </div>
+            </div>
 
-                <div class="query-list" id="queryList">
-                    <div class="no-queries">
-                        <p>No queries raised yet. Submit your first query!</p>
-                    </div>
+            <!-- Compliance Alerts Section -->
+            <div class="section-card compliance-section">
+                <h2 class="section-title">🚨 Compliance Alerts</h2>
+                <div class="scrollable" id="complianceList">
+                    <div class="loading">Select a department to view compliance alerts...</div>
                 </div>
+            </div>
+
+            <!-- Enhanced RMS Queries Section -->
+        <div class="section-card rms-queries-section">
+            <h2 class="section-title">
+                💬 RMS Queries with Responses
+                <button class="raise-query-btn" onclick="openQueryModal()">+ Raise New Query</button>
+            </h2>
+            <div class="scrollable" id="enhancedQueriesList">
+                <div class="loading">Select a department to view queries...</div>
             </div>
         </div>
+    </div>
+
+    <!-- RMS Query Submission Modal -->
+    <div id="queryModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🚨 Raise New RMS Query</h2>
+                <span class="close" onclick="closeQueryModal()">&times;</span>
+            </div>
+            
+            <form id="queryForm">
+                <div class="form-group">
+                    <label>Query Title *</label>
+                    <input type="text" id="queryTitle" placeholder="Brief description of the issue" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Category *</label>
+                    <select id="queryCategory" required>
+                        <option value="">Select Category</option>
+                        <option value="technical">Technical Issue</option>
+                        <option value="operational">Operational Problem</option>
+                        <option value="safety">Safety Concern</option>
+                        <option value="maintenance">Maintenance Request</option>
+                        <option value="compliance">Compliance Issue</option>
+                        <option value="resource">Resource Request</option>
+                        <option value="training">Training Required</option>
+                        <option value="general">General Query</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Priority Level *</label>
+                    <div class="priority-selector" id="prioritySelector">
+                        <div class="priority-btn low" data-priority="low">Low</div>
+                        <div class="priority-btn medium active" data-priority="medium">Medium</div>
+                        <div class="priority-btn high" data-priority="high">High</div>
+                        <div class="priority-btn critical" data-priority="critical">Critical</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Detailed Description *</label>
+                    <textarea id="queryDescription" placeholder="Provide detailed information about the query or issue..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Your Name *</label>
+                    <input type="text" id="raisedBy" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Contact Number</label>
+                    <input type="tel" id="contactNumber" placeholder="Your contact number for follow-up">
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    📤 Submit RMS Query
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
     </div>
 
     <script>
@@ -464,7 +895,7 @@
         }
 
         // Select department
-        function selectDepartment(dept) {
+        async function selectDepartment(dept) {
             selectedDepartment = dept;
             
             // Update UI
@@ -473,151 +904,278 @@
             });
             document.querySelector(`[data-department="${dept}"]`).classList.add('active');
             
-            // Load department queries
-            loadDepartmentQueries();
+            // Show dashboard content
+            document.getElementById('dashboardContent').style.display = 'grid';
+            
+            // Load all department data
+            await Promise.all([
+                loadDepartmentDocuments(),
+                loadDepartmentJobs(),
+                loadComplianceAlerts(),
+                loadEnhancedQueries()
+            ]);
         }
 
-        // Priority selector
-        document.querySelectorAll('.priority-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.priority-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                selectedPriority = btn.dataset.priority;
-            });
-        });
-
-        // Form submission
-        document.getElementById('queryForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            if (!selectedDepartment) {
-                showAlert('Please select your department first!', 'error');
-                return;
-            }
-            
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Submitting...';
-            
-            const queryData = {
-                department: selectedDepartment,
-                title: document.getElementById('queryTitle').value,
-                description: document.getElementById('queryDescription').value,
-                category: document.getElementById('queryCategory').value,
-                priority: selectedPriority,
-                raised_by: document.getElementById('raisedBy').value,
-                contact: document.getElementById('contactNumber').value
-            };
-            
-            try {
-                const response = await fetch('/raise-query', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(queryData)
-                });
-                
-                const result = await response.json();
-                console.log('Form submission result:', result);
-                
-                if (result.success) {
-                    const message = `✅ Query ${result.query_id} submitted successfully! Your request is now in the system.`;
-                    showAlert(message, 'success');
-                    console.log('Success message shown:', message);
-                    
-                    // Reset form after successful submission
-                    document.getElementById('queryForm').reset();
-                    selectedDepartment = null;
-                    selectedPriority = 'medium';
-                    
-                    // Update department selector visuals
-                    document.querySelectorAll('.dept-card').forEach(card => {
-                        card.classList.remove('selected');
-                    });
-                    
-                    // Update priority selector visuals
-                    document.querySelectorAll('.priority-btn').forEach(btn => {
-                        btn.classList.remove('active');
-                    });
-                    document.querySelector('[data-priority="medium"]').classList.add('active');
-                    
-                    loadDepartmentQueries();
-                } else {
-                    const errorMsg = '❌ Error: ' + (result.error || 'Unknown error occurred');
-                    showAlert(errorMsg, 'error');
-                    console.error('Submission error:', result);
-                }
-            } catch (error) {
-                showAlert('❌ Network error: ' + error.message, 'error');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = '📤 Submit RMS Query';
-            }
-        });
-
-        // Load department queries
-        async function loadDepartmentQueries() {
+        // Load incoming documents
+        async function loadDepartmentDocuments() {
             if (!selectedDepartment) return;
             
+            const documentsList = document.getElementById('documentsList');
+            documentsList.innerHTML = '<div class="loading">Loading documents...</div>';
+            
             try {
-                const response = await fetch(`/get-department-queries/${selectedDepartment}`);
+                const response = await fetch(`/get-department-documents/${selectedDepartment}`);
                 const result = await response.json();
                 
                 if (result.success) {
-                    displayQueries(result.queries);
-                    updateStatistics(result.queries);
+                    displayDocuments(result.documents);
+                } else {
+                    documentsList.innerHTML = '<div class="no-data">Error loading documents</div>';
                 }
             } catch (error) {
-                console.error('Error loading queries:', error);
+                console.error('Error loading documents:', error);
+                documentsList.innerHTML = '<div class="no-data">Error loading documents</div>';
             }
         }
 
-        // Display queries
-        function displayQueries(queries) {
-            const queryList = document.getElementById('queryList');
+        // Display documents
+        function displayDocuments(documents) {
+            const documentsList = document.getElementById('documentsList');
             
-            if (queries.length === 0) {
-                queryList.innerHTML = '<div class="no-queries"><p>No queries raised yet. Submit your first query!</p></div>';
+            if (documents.length === 0) {
+                documentsList.innerHTML = '<div class="no-data">No incoming documents for this department</div>';
                 return;
             }
             
-            queryList.innerHTML = queries.map(query => `
-                <div class="query-item ${query.status}">
-                    <div class="query-header">
-                        <span class="query-id">ID: ${query.id}</span>
-                        <span class="query-status ${query.status}">${formatStatus(query.status)}</span>
+            documentsList.innerHTML = documents.map(doc => `
+                <div class="document-item ${doc.priority} fade-in">
+                    <div class="document-header">
+                        <div class="document-title">${doc.title}</div>
+                        <span class="document-priority ${doc.priority}">${doc.priority.toUpperCase()}</span>
                     </div>
-                    <div class="query-title">${query.title}</div>
-                    <div class="query-meta">
-                        Category: ${query.category} | Priority: ${query.priority} | 
-                        ${formatDate(query.timestamp)}
+                    <div class="document-meta">
+                        From: ${doc.sender} | Type: ${doc.type} | 
+                        Deadline: ${formatDate(doc.deadline)}
                     </div>
+                    <div class="document-description">${doc.description}</div>
                 </div>
             `).join('');
         }
 
-        // Update statistics
-        function updateStatistics(queries) {
-            const stats = {
-                total: queries.length,
-                pending: queries.filter(q => q.status === 'pending').length,
-                in_progress: queries.filter(q => q.status === 'in_progress').length,
-                resolved: queries.filter(q => q.status === 'resolved').length
-            };
+        // Load job cards
+        async function loadDepartmentJobs() {
+            if (!selectedDepartment) return;
             
-            document.getElementById('totalQueries').textContent = stats.total;
-            document.getElementById('pendingQueries').textContent = stats.pending;
-            document.getElementById('progressQueries').textContent = stats.in_progress;
-            document.getElementById('resolvedQueries').textContent = stats.resolved;
+            const jobsList = document.getElementById('jobsList');
+            jobsList.innerHTML = '<div class="loading">Loading job cards...</div>';
+            
+            try {
+                const response = await fetch(`/get-department-jobs/${selectedDepartment}`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    displayJobs(result.jobs);
+                } else {
+                    jobsList.innerHTML = '<div class="no-data">Error loading job cards</div>';
+                }
+            } catch (error) {
+                console.error('Error loading jobs:', error);
+                jobsList.innerHTML = '<div class="no-data">Error loading job cards</div>';
+            }
+        }
+
+        // Display job cards
+        function displayJobs(jobs) {
+            const jobsList = document.getElementById('jobsList');
+            
+            if (jobs.length === 0) {
+                jobsList.innerHTML = '<div class="no-data">No job cards assigned to this department</div>';
+                return;
+            }
+            
+            jobsList.innerHTML = jobs.map(job => {
+                const isOverdue = job.is_overdue ? 'overdue' : '';
+                const deadlineClass = job.is_overdue ? 'overdue' : '';
+                
+                return `
+                    <div class="job-item ${job.status} ${isOverdue} fade-in">
+                        <div class="job-header">
+                            <div class="job-title">${job.task}</div>
+                            <span class="job-status ${job.status}" onclick="updateJobStatus('${job.id}', '${job.status}')">
+                                ${formatStatus(job.status)}
+                            </span>
+                        </div>
+                        <div class="job-deadline ${deadlineClass}">
+                            Deadline: ${formatDate(job.deadline)} 
+                            ${job.is_overdue ? '(OVERDUE!)' : ''}
+                        </div>
+                        <div class="document-meta">
+                            Assigned by: ${job.assigned_by} | Priority: ${job.priority} | 
+                            Est. ${job.estimated_hours}h
+                        </div>
+                        <div class="document-description">${job.description}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Update job status
+        async function updateJobStatus(jobId, currentStatus) {
+            const statuses = ['pending', 'in_progress', 'done'];
+            const currentIndex = statuses.indexOf(currentStatus);
+            const nextStatus = statuses[(currentIndex + 1) % statuses.length];
+            
+            try {
+                const response = await fetch('/update-job-status', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        job_id: jobId,
+                        status: nextStatus
+                    })
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    showAlert(`Job status updated to ${formatStatus(nextStatus)}`, 'success');
+                    loadDepartmentJobs(); // Reload jobs
+                } else {
+                    showAlert('Error updating job status', 'error');
+                }
+            } catch (error) {
+                console.error('Error updating job status:', error);
+                showAlert('Error updating job status', 'error');
+            }
+        }
+
+        // Load compliance alerts
+        async function loadComplianceAlerts() {
+            if (!selectedDepartment) return;
+            
+            const complianceList = document.getElementById('complianceList');
+            complianceList.innerHTML = '<div class="loading">Loading compliance alerts...</div>';
+            
+            try {
+                const response = await fetch(`/get-department-compliance/${selectedDepartment}`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    displayCompliance(result.alerts);
+                } else {
+                    complianceList.innerHTML = '<div class="no-data">Error loading compliance alerts</div>';
+                }
+            } catch (error) {
+                console.error('Error loading compliance:', error);
+                complianceList.innerHTML = '<div class="no-data">Error loading compliance alerts</div>';
+            }
+        }
+
+        // Display compliance alerts
+        function displayCompliance(alerts) {
+            const complianceList = document.getElementById('complianceList');
+            
+            if (alerts.length === 0) {
+                complianceList.innerHTML = '<div class="no-data">No compliance alerts for this department</div>';
+                return;
+            }
+            
+            complianceList.innerHTML = alerts.map(alert => {
+                const daysRemaining = alert.days_remaining || 0;
+                const daysClass = daysRemaining < 0 ? 'overdue' : '';
+                const statusText = daysRemaining < 0 ? 'OVERDUE' : `${Math.abs(daysRemaining)} days`;
+                
+                return `
+                    <div class="compliance-item ${alert.status} fade-in">
+                        <div class="compliance-header">
+                            <div class="compliance-title">${alert.title}</div>
+                            <span class="compliance-urgency ${alert.urgency}">${alert.urgency.toUpperCase()}</span>
+                        </div>
+                        <div class="compliance-meta">
+                            <span class="compliance-deadline">Deadline: ${formatDate(alert.deadline)}</span><br>
+                            <span class="compliance-days-remaining ${daysClass}">Time remaining: ${statusText}</span><br>
+                            <strong>Regulation:</strong> ${alert.regulation || 'N/A'}
+                        </div>
+                        <div class="compliance-description">${alert.description}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Load enhanced RMS queries with responses
+        async function loadEnhancedQueries() {
+            if (!selectedDepartment) return;
+            
+            const queriesList = document.getElementById('enhancedQueriesList');
+            queriesList.innerHTML = '<div class="loading">Loading queries...</div>';
+            
+            try {
+                const response = await fetch(`/get-enhanced-queries/${selectedDepartment}`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    displayEnhancedQueries(result.queries);
+                } else {
+                    queriesList.innerHTML = '<div class="no-data">Error loading queries</div>';
+                }
+            } catch (error) {
+                console.error('Error loading enhanced queries:', error);
+                queriesList.innerHTML = '<div class="no-data">Error loading queries</div>';
+            }
+        }
+
+        // Display enhanced queries with responses
+        function displayEnhancedQueries(queries) {
+            const queriesList = document.getElementById('enhancedQueriesList');
+            
+            if (queries.length === 0) {
+                queriesList.innerHTML = '<div class="no-data">No queries found for this department</div>';
+                return;
+            }
+            
+            queriesList.innerHTML = queries.map(query => {
+                let responsesHtml = '';
+                if (query.responses && query.responses.length > 0) {
+                    responsesHtml = `
+                        <div class="query-responses">
+                            <strong style="color: rgba(255,255,255,0.8); font-size: 0.85em;">📬 Responses (${query.responses.length}):</strong>
+                            ${query.responses.map(response => `
+                                <div class="response-item">
+                                    <div class="response-header">
+                                        <span class="response-from">👤 ${response.from}</span>
+                                        <span class="response-time">🕒 ${formatDate(response.timestamp)}</span>
+                                    </div>
+                                    <div class="response-message">${response.message}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                } else {
+                    responsesHtml = '<div style="font-size: 0.8em; color: rgba(255,255,255,0.5); font-style: italic; margin-top: 8px;">⏳ Awaiting response...</div>';
+                }
+                
+                return `
+                    <div class="query-item ${query.status} fade-in">
+                        <div class="query-header">
+                            <span class="query-id">🆔 ${query.id}</span>
+                            <span class="query-status ${query.status}">${formatStatus(query.status)}</span>
+                        </div>
+                        <div class="query-title">${query.title}</div>
+                        <div class="query-meta">
+                            📂 <strong>Category:</strong> ${query.category} | 
+                            🔥 <strong>Priority:</strong> ${query.priority} | 
+                            📅 ${formatDate(query.timestamp)}
+                        </div>
+                        ${responsesHtml}
+                    </div>
+                `;
+            }).join('');
         }
 
         // Utility functions
         function showAlert(message, type) {
-            console.log('showAlert called with:', message, type);
             const alertBox = document.getElementById('alertBox');
             
             if (!alertBox) {
-                console.error('Alert box element not found!');
-                // Fallback to browser alert
                 alert(message);
                 return;
             }
@@ -625,16 +1183,8 @@
             alertBox.className = `alert ${type}`;
             alertBox.textContent = message;
             alertBox.style.display = 'block';
+            alertBox.style.opacity = '1';
             
-            // Add a slight animation
-            alertBox.style.opacity = '0';
-            setTimeout(() => {
-                alertBox.style.opacity = '1';
-            }, 10);
-            
-            console.log('Alert shown:', message);
-            
-            // Auto-hide after 5 seconds
             setTimeout(() => {
                 alertBox.style.opacity = '0';
                 setTimeout(() => {
@@ -649,7 +1199,107 @@
 
         function formatDate(timestamp) {
             const date = new Date(timestamp);
-            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        }
+
+        // Modal functions
+        function openQueryModal() {
+            if (!selectedDepartment) {
+                showAlert('Please select your department first!', 'error');
+                return;
+            }
+            document.getElementById('queryModal').style.display = 'block';
+        }
+
+        function closeQueryModal() {
+            document.getElementById('queryModal').style.display = 'none';
+        }
+
+        // Priority selector for modal
+        function initializePrioritySelector() {
+            document.querySelectorAll('.priority-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.priority-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    selectedPriority = btn.dataset.priority;
+                });
+            });
+        }
+
+        // Form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const queryForm = document.getElementById('queryForm');
+            if (queryForm) {
+                queryForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    if (!selectedDepartment) {
+                        showAlert('Please select your department first!', 'error');
+                        return;
+                    }
+                    
+                    const submitBtn = document.getElementById('submitBtn');
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Submitting...';
+                    
+                    const queryData = {
+                        department: selectedDepartment,
+                        title: document.getElementById('queryTitle').value,
+                        description: document.getElementById('queryDescription').value,
+                        category: document.getElementById('queryCategory').value,
+                        priority: selectedPriority,
+                        raised_by: document.getElementById('raisedBy').value,
+                        contact: document.getElementById('contactNumber').value
+                    };
+                    
+                    try {
+                        const response = await fetch('/raise-query', {
+                            method: 'POST',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify(queryData)
+                        });
+                        
+                        const result = await response.json();
+                        
+                        if (result.success) {
+                            const message = `✅ Query ${result.query_id} submitted successfully! Your request is now in the system.`;
+                            showAlert(message, 'success');
+                            
+                            // Reset form and close modal
+                            queryForm.reset();
+                            selectedPriority = 'medium';
+                            document.querySelectorAll('.priority-btn').forEach(btn => {
+                                btn.classList.remove('active');
+                            });
+                            document.querySelector('[data-priority="medium"]').classList.add('active');
+                            
+                            closeQueryModal();
+                            
+                            // Refresh queries list
+                            loadEnhancedQueries();
+                        } else {
+                            const errorMsg = '❌ Error: ' + (result.error || 'Unknown error occurred');
+                            showAlert(errorMsg, 'error');
+                        }
+                    } catch (error) {
+                        showAlert('❌ Network error: ' + error.message, 'error');
+                    } finally {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = '📤 Submit RMS Query';
+                    }
+                });
+            }
+            
+            // Initialize priority selector
+            initializePrioritySelector();
+        });
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('queryModal');
+            if (event.target == modal) {
+                closeQueryModal();
+            }
         }
 
         // Initialize on load

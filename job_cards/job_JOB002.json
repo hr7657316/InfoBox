@@ -1,0 +1,12 @@
+{
+  "id": "JOB002",
+  "task": "Vendor contract evaluation",
+  "department": "procurement",
+  "assigned_by": "Finance Department",
+  "priority": "medium",
+  "deadline": "2025-10-13T15:31:35.480781",
+  "status": "in_progress",
+  "created_date": "2025-09-30T15:31:35.480782",
+  "description": "Evaluate vendor contracts for maintenance services",
+  "estimated_hours": 8
+}

@@ -1,0 +1,16 @@
+{
+  "id": "DOC002",
+  "title": "Budget Allocation Guidelines Q4",
+  "sender": "Finance Department",
+  "type": "Financial Document",
+  "priority": "medium",
+  "received_date": "2025-10-01T15:31:35.480775",
+  "deadline": "2025-10-17T15:31:35.480777",
+  "status": "pending",
+  "relevant_departments": [
+    "finance",
+    "procurement",
+    "operations"
+  ],
+  "description": "Q4 budget allocation guidelines and spending limits"
+}
