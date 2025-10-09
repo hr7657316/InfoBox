@@ -1,0 +1,281 @@
+# Data Extraction Pipeline Configuration
+# This is a template configuration file. Copy this to your working directory and customize as needed.
+
+# WhatsApp Configuration
+whatsapp:
+  enabled: true
+  # API provider: 'business_api' or 'twilio'
+  api_provider: "business_api"
+  
+  # WhatsApp Business API Configuration
+  business_api:
+    # Get these from Facebook Developer Console
+    phone_number_id: ""  # Set via WHATSAPP_PHONE_NUMBER_ID environment variable
+    access_token: ""     # Set via WHATSAPP_ACCESS_TOKEN environment variable
+    webhook_verify_token: ""  # Set via WHATSAPP_WEBHOOK_VERIFY_TOKEN environment variable
+    api_version: "v18.0"
+    base_url: "https://graph.facebook.com"
+  
+  # Twilio WhatsApp API Configuration (alternative)
+  twilio:
+    account_sid: ""      # Set via TWILIO_ACCOUNT_SID environment variable
+    auth_token: ""       # Set via TWILIO_AUTH_TOKEN environment variable
+    whatsapp_number: ""  # Set via TWILIO_WHATSAPP_NUMBER environment variable
+  
+  # Rate limiting settings
+  rate_limit:
+    requests_per_minute: 60
+    retry_attempts: 3
+    backoff_factor: 2
+
+# Email Configuration
+email:
+  enabled: true
+  accounts:
+    - name: "primary_gmail"
+      provider: "gmail"
+      email: ""          # Set via EMAIL_PRIMARY_ADDRESS environment variable
+      # Authentication method: 'oauth2' (recommended) or 'app_password'
+      auth_method: "oauth2"
+      
+      # OAuth2 Configuration (for Gmail)
+      oauth2:
+        client_id: ""     # Set via GMAIL_CLIENT_ID environment variable
+        client_secret: "" # Set via GMAIL_CLIENT_SECRET environment variable
+        refresh_token: "" # Set via GMAIL_REFRESH_TOKEN environment variable
+      
+      # App Password Configuration (alternative)
+      app_password: ""    # Set via EMAIL_PRIMARY_PASSWORD environment variable
+      
+      # IMAP Settings
+      imap_server: "imap.gmail.com"
+      imap_port: 993
+      use_ssl: true
+      
+      # Extraction Settings
+      folders: ["INBOX", "Sent"]
+      date_range_days: 30  # Extract emails from last N days (0 = all emails)
+      unread_only: false
+      include_attachments: true
+      max_attachment_size_mb: 25
+    
+    # Example for additional email account
+    # - name: "work_outlook"
+    #   provider: "outlook"
+    #   email: ""          # Set via EMAIL_WORK_ADDRESS environment variable
+    #   auth_method: "app_password"
+    #   app_password: ""   # Set via EMAIL_WORK_PASSWORD environment variable
+    #   imap_server: "outlook.office365.com"
+    #   imap_port: 993
+    #   use_ssl: true
+    #   folders: ["INBOX"]
+    #   date_range_days: 7
+    #   unread_only: true
+    #   include_attachments: true
+    #   max_attachment_size_mb: 10
+
+# Storage Configuration
+storage:
+  # Base directory for all extracted data
+  base_path: "./data"
+  
+  # Directory structure: {base_path}/{source}/{date}/
+  # Example: ./data/whatsapp/2025-01-15/
+  organize_by_date: true
+  date_format: "%Y-%m-%d"
+  
+  # File formats to save data in
+  formats:
+    json: true
+    csv: true
+  
+  # Media file settings
+  media:
+    download_enabled: true
+    max_file_size_mb: 100
+    allowed_extensions: [".jpg", ".jpeg", ".png", ".gif", ".pdf", ".doc", ".docx", ".mp4", ".mp3", ".wav"]
+    organize_by_type: true  # Create subfolders by file type
+  
+  # Deduplication settings
+  deduplication:
+    enabled: true
+    method: "content_hash"  # 'content_hash' or 'metadata'
+
+# Logging Configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  
+  # Console logging
+  console:
+    enabled: true
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  
+  # File logging
+  file:
+    enabled: true
+    path: "./logs"
+    filename: "pipeline.log"
+    max_size_mb: 10
+    backup_count: 5
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(funcName)s:%(lineno)d - %(message)s"
+  
+  # Component-specific logging levels
+  components:
+    whatsapp_extractor: "INFO"
+    email_extractor: "INFO"
+    storage_manager: "INFO"
+    config_manager: "WARNING"
+
+# Scheduler Configuration
+scheduler:
+  enabled: false
+  
+  # Schedule type: 'interval', 'cron', or 'daily'
+  schedule_type: "daily"
+  
+  # For interval scheduling (in hours)
+  interval_hours: 24
+  
+  # For cron scheduling (standard cron expression)
+  cron_expression: "0 2 * * *"  # Daily at 2:00 AM
+  
+  # For daily scheduling (time in HH:MM format)
+  daily_time: "02:00"
+  
+  # Timezone for scheduling (optional)
+  timezone: "UTC"
+
+# Notification Configuration
+notifications:
+  enabled: false
+  
+  # Email notifications
+  email:
+    enabled: false
+    smtp_server: "smtp.gmail.com"
+    smtp_port: 587
+    username: ""     # Set via NOTIFICATION_EMAIL_USERNAME environment variable
+    password: ""     # Set via NOTIFICATION_EMAIL_PASSWORD environment variable
+    from_email: ""   # Set via NOTIFICATION_FROM_EMAIL environment variable
+    to_emails: []    # List of recipient email addresses
+    
+    # When to send notifications
+    on_success: true
+    on_error: true
+    include_summary: true
+  
+  # WhatsApp notifications (using same API as extraction)
+  whatsapp:
+    enabled: false
+    to_numbers: []   # List of phone numbers to notify
+    on_success: false
+    on_error: true
+
+# Error Handling Configuration
+error_handling:
+  # Retry configuration
+  retry:
+    max_attempts: 3
+    backoff_factor: 2
+    max_delay_seconds: 300
+  
+  # Graceful degradation
+  graceful_degradation: true
+  continue_on_source_failure: true
+  
+  # Error categorization
+  critical_errors:
+    - "authentication_failed"
+    - "invalid_credentials"
+    - "storage_permission_denied"
+  
+  # Recovery strategies
+  recovery:
+    auto_retry_network_errors: true
+    skip_corrupted_messages: true
+    fallback_to_metadata_only: true
+
+# Performance Configuration
+performance:
+  # Concurrent processing
+  max_concurrent_accounts: 3
+  max_concurrent_downloads: 5
+  
+  # Memory management
+  batch_size: 100  # Process messages in batches
+  max_memory_usage_mb: 512
+  
+  # Timeout settings
+  api_timeout_seconds: 30
+  download_timeout_seconds: 60
+  connection_timeout_seconds: 10
+
+# Development and Testing Configuration
+development:
+  # Enable debug mode
+  debug_mode: false
+  
+  # Mock API responses for testing
+  mock_apis: false
+  
+  # Test data configuration
+  test_data:
+    generate_sample_data: false
+    sample_message_count: 10
+    sample_email_count: 5
+
+# InfoBox Document Processing Configuration
+infobox:
+  enabled: true
+  
+  # Web interface settings
+  web_interface:
+    host: "127.0.0.1"
+    port: 9090
+    debug: true
+  
+  # Document processing directories
+  directories:
+    input: "documents-testing"
+    output: "output_documenty"
+    uploads: "uploads"
+    summaries: "summaries"
+    metadata: "metadata"
+  
+  # File upload settings
+  upload:
+    max_file_size_mb: 16
+    allowed_extensions: ["pdf", "png", "jpg", "jpeg", "gif", "tiff", "bmp", "doc", "docx", "txt"]
+  
+  # AI processing settings
+  ai_processing:
+    # Unstructured API for document parsing
+    unstructured_api_key: ""  # Set via UNSTRUCTURED_API_KEY environment variable
+    
+    # Google Gemini for AI summarization
+    gemini_api_key: ""        # Set via GOOGLE_API_KEY environment variable
+    
+    # Processing options
+    auto_generate_summaries: true
+    auto_extract_metadata: true
+    include_malayalam_translation: true
+  
+  # Email assignment settings
+  email_assignment:
+    enabled: true
+    smtp_server: "smtp.gmail.com"
+    smtp_port: 587
+    email_user: ""            # Set via EMAIL_USER environment variable
+    email_password: ""        # Set via EMAIL_PASSWORD environment variable
+    
+    # Role-based email addresses
+    role_emails:
+      hr: "hr@kmrl.co.in"
+      engineer: "engineer@kmrl.co.in"
+      inspector: "inspector@kmrl.co.in"
+      contractor: "contractor@kmrl.co.in"
+      manager: "manager@kmrl.co.in"
+      finance: "finance@kmrl.co.in"
+      general: "general@kmrl.co.in"
+      safety: "safety@kmrl.co.in"
+      operations: "operations@kmrl.co.in"

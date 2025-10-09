@@ -1,0 +1,72 @@
+# Docker Compose configuration for Data Extraction Pipeline
+version: '3.8'
+
+services:
+  pipeline:
+    build: .
+    container_name: data-extraction-pipeline
+    restart: unless-stopped
+    
+    # Environment variables (override with .env file)
+    environment:
+      - CONFIG_FILE=config.yaml
+      - LOG_LEVEL=INFO
+      - STORAGE_BASE_PATH=/app/data
+    
+    # Mount volumes for persistent data
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./config.yaml:/app/config.yaml:ro
+      - ./.env:/app/.env:ro
+    
+    # Network configuration
+    networks:
+      - pipeline-network
+    
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+        reservations:
+          memory: 256M
+          cpus: '0.25'
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "python", "-c", "from pipeline.main import PipelineOrchestrator; print('OK')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Optional: Add a scheduler service for automated runs
+  scheduler:
+    build: .
+    container_name: pipeline-scheduler
+    restart: unless-stopped
+    
+    environment:
+      - CONFIG_FILE=config.yaml
+      - SCHEDULER_ENABLED=true
+    
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./config.yaml:/app/config.yaml:ro
+      - ./.env:/app/.env:ro
+    
+    networks:
+      - pipeline-network
+    
+    # Override command for scheduler
+    command: ["python", "-c", "from pipeline.scheduler import run_scheduler; run_scheduler()"]
+    
+    depends_on:
+      - pipeline
+
+networks:
+  pipeline-network:
+    driver: bridge

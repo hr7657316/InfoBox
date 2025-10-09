@@ -1,0 +1,62 @@
+[
+  {
+    "id": "wamid.HBgNMTIzNDU2Nzg5MDEyMxUCABIYIDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEy",
+    "timestamp": "2025-01-15T10:30:00Z",
+    "sender_phone": "+1234567890",
+    "sender_name": "John Doe",
+    "message_content": "Hello! This is a sample WhatsApp message for testing the data extraction pipeline.",
+    "message_type": "text",
+    "media_url": null,
+    "media_filename": null,
+    "media_size": null,
+    "extracted_at": "2025-01-15T12:00:00Z"
+  },
+  {
+    "id": "wamid.HBgNMTIzNDU2Nzg5MDEyMxUCABIYIDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEz",
+    "timestamp": "2025-01-15T10:35:00Z",
+    "sender_phone": "+1234567890",
+    "sender_name": "John Doe",
+    "message_content": "Here's an image I wanted to share with you.",
+    "message_type": "image",
+    "media_url": "https://example.com/media/image123.jpg",
+    "media_filename": "image_20250115_103500.jpg",
+    "media_size": 245760,
+    "extracted_at": "2025-01-15T12:00:00Z"
+  },
+  {
+    "id": "wamid.HBgNMTIzNDU2Nzg5MDEyMxUCABIYIDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDE0",
+    "timestamp": "2025-01-15T11:00:00Z",
+    "sender_phone": "+0987654321",
+    "sender_name": "Jane Smith",
+    "message_content": "Thanks for the update! Can you send me the document we discussed?",
+    "message_type": "text",
+    "media_url": null,
+    "media_filename": null,
+    "media_size": null,
+    "extracted_at": "2025-01-15T12:00:00Z"
+  },
+  {
+    "id": "wamid.HBgNMTIzNDU2Nzg5MDEyMxUCABIYIDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDE1",
+    "timestamp": "2025-01-15T11:15:00Z",
+    "sender_phone": "+1234567890",
+    "sender_name": "John Doe",
+    "message_content": "",
+    "message_type": "document",
+    "media_url": "https://example.com/media/document456.pdf",
+    "media_filename": "project_proposal_20250115.pdf",
+    "media_size": 1048576,
+    "extracted_at": "2025-01-15T12:00:00Z"
+  },
+  {
+    "id": "wamid.HBgNMTIzNDU2Nzg5MDEyMxUCABIYIDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDE2",
+    "timestamp": "2025-01-15T14:20:00Z",
+    "sender_phone": "+1555123456",
+    "sender_name": "Business Contact",
+    "message_content": "Meeting scheduled for tomorrow at 2 PM. Please confirm your attendance.",
+    "message_type": "text",
+    "media_url": null,
+    "media_filename": null,
+    "media_size": null,
+    "extracted_at": "2025-01-15T15:00:00Z"
+  }
+]
