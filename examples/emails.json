@@ -1,0 +1,101 @@
+[
+  {
+    "id": "email_1642234567890",
+    "timestamp": "2025-01-15T09:15:00Z",
+    "sender_email": "sender@example.com",
+    "sender_name": "Alice Johnson",
+    "recipient_emails": ["recipient@company.com"],
+    "subject": "Project Update - Q1 2025",
+    "body_text": "Hi there,\n\nI wanted to provide you with an update on our Q1 2025 project progress. We've completed the initial phase and are moving into development.\n\nPlease find the attached project timeline for your review.\n\nBest regards,\nAlice",
+    "body_html": "<html><body><p>Hi there,</p><p>I wanted to provide you with an update on our Q1 2025 project progress. We've completed the initial phase and are moving into development.</p><p>Please find the attached project timeline for your review.</p><p>Best regards,<br>Alice</p></body></html>",
+    "attachments": [
+      {
+        "filename": "project_timeline_q1_2025.pdf",
+        "size": 524288,
+        "content_type": "application/pdf"
+      }
+    ],
+    "is_read": true,
+    "folder": "INBOX",
+    "extracted_at": "2025-01-15T12:00:00Z"
+  },
+  {
+    "id": "email_1642234567891",
+    "timestamp": "2025-01-15T11:30:00Z",
+    "sender_email": "support@service.com",
+    "sender_name": "Customer Support",
+    "recipient_emails": ["user@company.com"],
+    "subject": "Your Monthly Report is Ready",
+    "body_text": "Dear Valued Customer,\n\nYour monthly analytics report for December 2024 is now available for download.\n\nKey highlights:\n- 15% increase in user engagement\n- 23% growth in revenue\n- 98.5% uptime achieved\n\nThank you for choosing our service.\n\nBest regards,\nCustomer Support Team",
+    "body_html": "<html><body><h2>Dear Valued Customer,</h2><p>Your monthly analytics report for December 2024 is now available for download.</p><h3>Key highlights:</h3><ul><li>15% increase in user engagement</li><li>23% growth in revenue</li><li>98.5% uptime achieved</li></ul><p>Thank you for choosing our service.</p><p><strong>Best regards,</strong><br>Customer Support Team</p></body></html>",
+    "attachments": [
+      {
+        "filename": "monthly_report_december_2024.xlsx",
+        "size": 1048576,
+        "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      },
+      {
+        "filename": "analytics_chart.png",
+        "size": 204800,
+        "content_type": "image/png"
+      }
+    ],
+    "is_read": false,
+    "folder": "INBOX",
+    "extracted_at": "2025-01-15T12:00:00Z"
+  },
+  {
+    "id": "email_1642234567892",
+    "timestamp": "2025-01-15T14:45:00Z",
+    "sender_email": "team@company.com",
+    "sender_name": "Development Team",
+    "recipient_emails": ["manager@company.com", "lead@company.com"],
+    "subject": "Code Review Request - Feature Branch",
+    "body_text": "Hi Team,\n\nI've completed the implementation of the new user authentication feature. The code is ready for review.\n\nBranch: feature/user-auth-v2\nCommits: 15 commits\nFiles changed: 23 files\n\nPlease review when you have a chance. The feature includes:\n- Multi-factor authentication\n- OAuth2 integration\n- Enhanced security measures\n\nThanks!\nDev Team",
+    "body_html": "<html><body><p>Hi Team,</p><p>I've completed the implementation of the new user authentication feature. The code is ready for review.</p><ul><li><strong>Branch:</strong> feature/user-auth-v2</li><li><strong>Commits:</strong> 15 commits</li><li><strong>Files changed:</strong> 23 files</li></ul><p>Please review when you have a chance. The feature includes:</p><ul><li>Multi-factor authentication</li><li>OAuth2 integration</li><li>Enhanced security measures</li></ul><p>Thanks!<br>Dev Team</p></body></html>",
+    "attachments": [],
+    "is_read": true,
+    "folder": "INBOX",
+    "extracted_at": "2025-01-15T12:00:00Z"
+  },
+  {
+    "id": "email_1642234567893",
+    "timestamp": "2025-01-14T16:20:00Z",
+    "sender_email": "noreply@newsletter.com",
+    "sender_name": "Tech Weekly Newsletter",
+    "recipient_emails": ["subscriber@company.com"],
+    "subject": "Tech Weekly #47: AI Trends and Cloud Computing",
+    "body_text": "Welcome to Tech Weekly!\n\nThis week's highlights:\n\n1. AI Revolution: Latest developments in machine learning\n2. Cloud Computing: Best practices for 2025\n3. Cybersecurity: New threats and protection strategies\n4. Developer Tools: Must-have tools for modern development\n\nRead the full newsletter online or download the PDF version.\n\nHappy coding!\nTech Weekly Team",
+    "body_html": "<html><body><h1>Welcome to Tech Weekly!</h1><p>This week's highlights:</p><ol><li><strong>AI Revolution:</strong> Latest developments in machine learning</li><li><strong>Cloud Computing:</strong> Best practices for 2025</li><li><strong>Cybersecurity:</strong> New threats and protection strategies</li><li><strong>Developer Tools:</strong> Must-have tools for modern development</li></ol><p>Read the full newsletter online or download the PDF version.</p><p><em>Happy coding!</em><br>Tech Weekly Team</p></body></html>",
+    "attachments": [
+      {
+        "filename": "tech_weekly_47.pdf",
+        "size": 2097152,
+        "content_type": "application/pdf"
+      }
+    ],
+    "is_read": false,
+    "folder": "INBOX",
+    "extracted_at": "2025-01-15T12:00:00Z"
+  },
+  {
+    "id": "email_1642234567894",
+    "timestamp": "2025-01-15T08:00:00Z",
+    "sender_email": "user@company.com",
+    "sender_name": "Current User",
+    "recipient_emails": ["client@external.com"],
+    "subject": "Meeting Follow-up and Next Steps",
+    "body_text": "Dear Client,\n\nThank you for the productive meeting yesterday. As discussed, here are the next steps:\n\n1. Finalize project requirements by Friday\n2. Schedule technical review session\n3. Prepare development timeline\n\nI'll send the detailed proposal by end of week.\n\nLooking forward to working together!\n\nBest regards,\nProject Manager",
+    "body_html": "<html><body><p>Dear Client,</p><p>Thank you for the productive meeting yesterday. As discussed, here are the next steps:</p><ol><li>Finalize project requirements by Friday</li><li>Schedule technical review session</li><li>Prepare development timeline</li></ol><p>I'll send the detailed proposal by end of week.</p><p>Looking forward to working together!</p><p><strong>Best regards,</strong><br>Project Manager</p></body></html>",
+    "attachments": [
+      {
+        "filename": "meeting_notes.docx",
+        "size": 65536,
+        "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      }
+    ],
+    "is_read": true,
+    "folder": "Sent",
+    "extracted_at": "2025-01-15T12:00:00Z"
+  }
+]

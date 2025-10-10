@@ -1,0 +1,64 @@
+id,timestamp,sender_email,sender_name,recipient_emails,subject,body_text,body_html,attachments,is_read,folder,extracted_at
+email_1642234567890,2025-01-15T09:15:00Z,sender@example.com,Alice Johnson,"[""recipient@company.com""]",Project Update - Q1 2025,"Hi there,
+
+I wanted to provide you with an update on our Q1 2025 project progress. We've completed the initial phase and are moving into development.
+
+Please find the attached project timeline for your review.
+
+Best regards,
+Alice","<html><body><p>Hi there,</p><p>I wanted to provide you with an update on our Q1 2025 project progress. We've completed the initial phase and are moving into development.</p><p>Please find the attached project timeline for your review.</p><p>Best regards,<br>Alice</p></body></html>","[{""filename"": ""project_timeline_q1_2025.pdf"", ""size"": 524288, ""content_type"": ""application/pdf""}]",true,INBOX,2025-01-15T12:00:00Z
+email_1642234567891,2025-01-15T11:30:00Z,support@service.com,Customer Support,"[""user@company.com""]",Your Monthly Report is Ready,"Dear Valued Customer,
+
+Your monthly analytics report for December 2024 is now available for download.
+
+Key highlights:
+- 15% increase in user engagement
+- 23% growth in revenue
+- 98.5% uptime achieved
+
+Thank you for choosing our service.
+
+Best regards,
+Customer Support Team","<html><body><h2>Dear Valued Customer,</h2><p>Your monthly analytics report for December 2024 is now available for download.</p><h3>Key highlights:</h3><ul><li>15% increase in user engagement</li><li>23% growth in revenue</li><li>98.5% uptime achieved</li></ul><p>Thank you for choosing our service.</p><p><strong>Best regards,</strong><br>Customer Support Team</p></body></html>","[{""filename"": ""monthly_report_december_2024.xlsx"", ""size"": 1048576, ""content_type"": ""application/vnd.openxmlformats-officedocument.spreadsheetml.sheet""}, {""filename"": ""analytics_chart.png"", ""size"": 204800, ""content_type"": ""image/png""}]",false,INBOX,2025-01-15T12:00:00Z
+email_1642234567892,2025-01-15T14:45:00Z,team@company.com,Development Team,"[""manager@company.com"", ""lead@company.com""]",Code Review Request - Feature Branch,"Hi Team,
+
+I've completed the implementation of the new user authentication feature. The code is ready for review.
+
+Branch: feature/user-auth-v2
+Commits: 15 commits
+Files changed: 23 files
+
+Please review when you have a chance. The feature includes:
+- Multi-factor authentication
+- OAuth2 integration
+- Enhanced security measures
+
+Thanks!
+Dev Team","<html><body><p>Hi Team,</p><p>I've completed the implementation of the new user authentication feature. The code is ready for review.</p><ul><li><strong>Branch:</strong> feature/user-auth-v2</li><li><strong>Commits:</strong> 15 commits</li><li><strong>Files changed:</strong> 23 files</li></ul><p>Please review when you have a chance. The feature includes:</p><ul><li>Multi-factor authentication</li><li>OAuth2 integration</li><li>Enhanced security measures</li></ul><p>Thanks!<br>Dev Team</p></body></html>","[]",true,INBOX,2025-01-15T12:00:00Z
+email_1642234567893,2025-01-14T16:20:00Z,noreply@newsletter.com,Tech Weekly Newsletter,"[""subscriber@company.com""]",Tech Weekly #47: AI Trends and Cloud Computing,"Welcome to Tech Weekly!
+
+This week's highlights:
+
+1. AI Revolution: Latest developments in machine learning
+2. Cloud Computing: Best practices for 2025
+3. Cybersecurity: New threats and protection strategies
+4. Developer Tools: Must-have tools for modern development
+
+Read the full newsletter online or download the PDF version.
+
+Happy coding!
+Tech Weekly Team","<html><body><h1>Welcome to Tech Weekly!</h1><p>This week's highlights:</p><ol><li><strong>AI Revolution:</strong> Latest developments in machine learning</li><li><strong>Cloud Computing:</strong> Best practices for 2025</li><li><strong>Cybersecurity:</strong> New threats and protection strategies</li><li><strong>Developer Tools:</strong> Must-have tools for modern development</li></ol><p>Read the full newsletter online or download the PDF version.</p><p><em>Happy coding!</em><br>Tech Weekly Team</p></body></html>","[{""filename"": ""tech_weekly_47.pdf"", ""size"": 2097152, ""content_type"": ""application/pdf""}]",false,INBOX,2025-01-15T12:00:00Z
+email_1642234567894,2025-01-15T08:00:00Z,user@company.com,Current User,"[""client@external.com""]",Meeting Follow-up and Next Steps,"Dear Client,
+
+Thank you for the productive meeting yesterday. As discussed, here are the next steps:
+
+1. Finalize project requirements by Friday
+2. Schedule technical review session
+3. Prepare development timeline
+
+I'll send the detailed proposal by end of week.
+
+Looking forward to working together!
+
+Best regards,
+Project Manager","<html><body><p>Dear Client,</p><p>Thank you for the productive meeting yesterday. As discussed, here are the next steps:</p><ol><li>Finalize project requirements by Friday</li><li>Schedule technical review session</li><li>Prepare development timeline</li></ol><p>I'll send the detailed proposal by end of week.</p><p>Looking forward to working together!</p><p><strong>Best regards,</strong><br>Project Manager</p></body></html>","[{""filename"": ""meeting_notes.docx"", ""size"": 65536, ""content_type"": ""application/vnd.openxmlformats-officedocument.wordprocessingml.document""}]",true,Sent,2025-01-15T12:00:00Z

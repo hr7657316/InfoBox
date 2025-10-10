@@ -1,0 +1,6 @@
+id,timestamp,sender_phone,sender_name,message_content,message_type,media_url,media_filename,media_size,extracted_at
+wamid.HBgNMTIzNDU2Nzg5MDEyMxUCABIYIDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEy,2025-01-15T10:30:00Z,+1234567890,John Doe,"Hello! This is a sample WhatsApp message for testing the data extraction pipeline.",text,,,2025-01-15T12:00:00Z
+wamid.HBgNMTIzNDU2Nzg5MDEyMxUCABIYIDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEz,2025-01-15T10:35:00Z,+1234567890,John Doe,"Here's an image I wanted to share with you.",image,https://example.com/media/image123.jpg,image_20250115_103500.jpg,245760,2025-01-15T12:00:00Z
+wamid.HBgNMTIzNDU2Nzg5MDEyMxUCABIYIDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDE0,2025-01-15T11:00:00Z,+0987654321,Jane Smith,"Thanks for the update! Can you send me the document we discussed?",text,,,2025-01-15T12:00:00Z
+wamid.HBgNMTIzNDU2Nzg5MDEyMxUCABIYIDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDE1,2025-01-15T11:15:00Z,+1234567890,John Doe,,document,https://example.com/media/document456.pdf,project_proposal_20250115.pdf,1048576,2025-01-15T12:00:00Z
+wamid.HBgNMTIzNDU2Nzg5MDEyMxUCABIYIDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDE2,2025-01-15T14:20:00Z,+1555123456,Business Contact,"Meeting scheduled for tomorrow at 2 PM. Please confirm your attendance.",text,,,2025-01-15T15:00:00Z

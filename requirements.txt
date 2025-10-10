@@ -1,3 +1,44 @@
+<<<<<<< HEAD
+# Integrated Data Extraction Pipeline + InfoBox Requirements
+
+# Core Pipeline Dependencies
+requests>=2.31.0
+pyyaml>=6.0
+python-dotenv>=1.0.0
+schedule>=1.2.0
+imaplib2>=3.6
+email-validator>=2.0.0
+cryptography>=41.0.0
+twilio>=8.5.0
+google-auth>=2.22.0
+google-auth-oauthlib>=1.0.0
+google-auth-httplib2>=0.1.0
+google-api-python-client>=2.95.0
+pathlib>=1.0.1
+
+# InfoBox Web Interface Dependencies
+flask==2.3.3
+flask-cors==4.0.0
+google-generativeai==0.3.2
+langextract>=1.0.9
+werkzeug==2.3.7
+
+# Document Processing (simplified - without full unstructured)
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+python-docx>=0.8.11
+openpyxl>=3.1.0
+PyPDF2>=3.0.0
+
+# Testing Dependencies
+pytest>=8.0.0
+pytest-cov>=4.0.0
+pytest-mock>=3.10.0
+
+# Development Dependencies (optional)
+black>=23.0.0
+flake8>=6.0.0
+=======
 flask==2.3.3
 flask-cors==4.0.0
 python-dotenv==1.0.0
@@ -7,3 +48,4 @@ langextract==0.4.1
 werkzeug==2.3.7
 pathlib2==2.3.7
 unstructured[all-docs]==0.10.30
+>>>>>>> upstream/main
