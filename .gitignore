@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -7,6 +8,16 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+=======
+# Environment variables (contains API keys and passwords)
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+>>>>>>> upstream/main
 .Python
 build/
 develop-eggs/
@@ -20,13 +31,17 @@ parts/
 sdist/
 var/
 wheels/
+<<<<<<< HEAD
 pip-wheel-metadata/
 share/python-wheels/
+=======
+>>>>>>> upstream/main
 *.egg-info/
 .installed.cfg
 *.egg
 MANIFEST
 
+<<<<<<< HEAD
 # PyInstaller
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
@@ -127,6 +142,13 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+=======
+# Virtual environment
+.venv/
+venv/
+ENV/
+env/
+>>>>>>> upstream/main
 
 # IDE
 .vscode/
@@ -144,6 +166,7 @@ dmypy.json
 ehthumbs.db
 Thumbs.db
 
+<<<<<<< HEAD
 # Project specific
 # Data directories (contain extracted/processed data)
 data/
@@ -177,3 +200,32 @@ credentials.json
 
 # InfoBox cloned directory (since we copied files)
 InfoBox/
+=======
+# Project specific directories with processed files
+uploads/
+output_documenty/
+summaries/
+metadata/
+documents-testing/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pytest
+.pytest_cache/
+.coverage
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+>>>>>>> upstream/main
