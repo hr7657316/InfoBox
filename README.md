@@ -8,6 +8,7 @@
 
 ## 📋 Table of Contents
 - [Overview](#overview)
+- [Demo Video](#-demo-video)
 - [System Architecture](#️-system-architecture)
 - [Key Features](#-key-features)
 - [Quick Start](#-quick-start)
@@ -22,7 +23,34 @@
 
 InfoBox is a comprehensive document intelligence platform designed specifically for railway management systems. It leverages cutting-edge AI technologies to automate document processing, enhance inter-department communication, and ensure regulatory compliance.
 
-## 🏗️ System Architecture
+## � Demo Video
+
+Watch InfoBox in action! This demo showcases the complete document processing workflow and key features of the KMRL Railway Management System:
+
+> **🎬 Demo**: *Document Overload at Kochi Metro Rail Limited - InfoBox Solution*
+
+### 📹 Video Highlights
+- **Document Upload & Processing** - See how documents are automatically classified and routed
+- **AI-Powered Intelligence** - Watch real-time OCR, metadata extraction, and content analysis
+- **Department Dashboards** - Explore role-based interfaces for different departments
+- **Job Card Management** - Observe automated job assignment and tracking
+- **Multi-channel Notifications** - Experience instant alerts and acknowledgments
+- **Q&A System** - Interact with documents using natural language queries
+
+### 🎯 What You'll See
+- Complete end-to-end document workflow
+- Real-time AI processing capabilities
+- User-friendly interface design
+- Multi-department coordination
+- Compliance and regulatory tracking
+
+**📁 Video File**: [`docs/videos/demo-video.mp4`](docs/videos/demo-video.mp4)
+
+> 💡 **Note**: For the full experience, download and play the video locally, or view it in the repository's video player.
+
+---
+
+## �🏗️ System Architecture
 
 The InfoBox platform follows a modular, microservices-based architecture designed for scalability and maintainability:
 
