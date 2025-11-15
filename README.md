@@ -23,7 +23,12 @@
 
 InfoBox is a comprehensive document intelligence platform designed specifically for railway management systems. It leverages cutting-edge AI technologies to automate document processing, enhance inter-department communication, and ensure regulatory compliance.
 
-## � Demo Video
+## � Demo
+
+https://github.com/user-attachments/assets/c3e06a8a-08c9-43ad-aa1e-0daae7c66fc7
+
+o Video
+
 
 Watch InfoBox in action! This demo showcases the complete document processing workflow and key features of the KMRL Railway Management System:
 
