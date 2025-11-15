@@ -49,9 +49,6 @@ Watch InfoBox in action! This demo showcases the complete document processing wo
 - Multi-department coordination
 - Compliance and regulatory tracking
 
-**📁 Video File**: [`docs/videos/demo-video.mp4`](docs/videos/demo-video.mp4)
-
-> 💡 **Note**: For the full experience, download and play the video locally, or view it in the repository's video player.
 
 ---
 
