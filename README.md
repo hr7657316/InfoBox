@@ -8,6 +8,7 @@
 
 ## 📋 Table of Contents
 - [Overview](#overview)
+- [System Architecture](#️-system-architecture)
 - [Key Features](#-key-features)
 - [Quick Start](#-quick-start)
 - [Installation](#installation)
@@ -20,6 +21,22 @@
 ## Overview
 
 InfoBox is a comprehensive document intelligence platform designed specifically for railway management systems. It leverages cutting-edge AI technologies to automate document processing, enhance inter-department communication, and ensure regulatory compliance.
+
+## 🏗️ System Architecture
+
+The InfoBox platform follows a modular, microservices-based architecture designed for scalability and maintainability:
+
+![System Architecture](docs/images/system-architecture.png)
+
+### Architecture Components
+
+- **Frontend Layer** - React-based user interface with department-specific dashboards
+- **API Gateway** - Flask-based REST API handling all client requests
+- **Document Processing Engine** - AI-powered document classification and extraction
+- **RAG System** - Retrieval Augmented Generation for intelligent document querying
+- **Notification Service** - Multi-channel alert system (Email, SMS, WhatsApp)
+- **Database Layer** - PostgreSQL for structured data, Redis for caching
+- **External Integrations** - Unstructured.io, Google Gemini AI, Nanonets OCR
 
 
 ## 🌟 Key Features
