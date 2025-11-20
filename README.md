@@ -114,10 +114,12 @@ The InfoBox platform follows a modular, microservices-based architecture designe
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Python 3.9+
+- **Python 3.12.5** (Recommended - tested and verified)
 - Valid API keys for:
   - Unstructured.io
   - Google Gemini AI
+  - Groq API
+  - Pinecone (for vector database)
 
 ### Installation
 
@@ -127,29 +129,86 @@ The InfoBox platform follows a modular, microservices-based architecture designe
    cd InfoBox
    ```
 
-2. **Install Dependencies**
+2. **Create Virtual Environment**
    ```bash
+   # Create virtual environment with Python 3.12
+   python3.12 -m venv venv
+   
+   # Activate virtual environment
+   # On macOS/Linux:
+   source venv/bin/activate
+   
+   # On Windows:
+   # venv\Scripts\activate
+   ```
+
+3. **Install Dependencies**
+   ```bash
+   # Upgrade pip first
+   pip install --upgrade pip
+   
+   # Install all requirements
    pip install -r requirements.txt
    ```
 
-3. **Configure API Keys**
+4. **Configure Environment Variables**
    
-   Create a `.env` file in the root directory:
+   Copy the example environment file and configure your API keys:
+   ```bash
+   cp .env.example .env
+   ```
+   
+   Edit `.env` file with your API keys and configuration:
    ```env
+   # AI Service API Keys
    UNSTRUCTURED_API_KEY=your_unstructured_api_key_here
    GEMINI_API_KEY=your_gemini_api_key_here
+   GROQ_API_KEY=your_groq_api_key_here
+   PINECONE_API_KEY=your_pinecone_api_key_here
+   
+   # Email Configuration (for notifications)
+   EMAIL_USER=your_email@gmail.com
+   EMAIL_PASSWORD=your_app_password
+   SMTP_SERVER=smtp.gmail.com
+   SMTP_PORT=587
+   
+   # KMRL Department Email Addresses
+   HR_EMAIL=hr@kmrl.org
+   ENGINEER_EMAIL=engineer@kmrl.org
+   INSPECTOR_EMAIL=inspector@kmrl.org
+   CONTRACTOR_EMAIL=contractor@kmrl.org
+   MANAGER_EMAIL=manager@kmrl.org
+   FINANCE_EMAIL=finance@kmrl.org
+   GENERAL_EMAIL=general@kmrl.org
+   SAFETY_EMAIL=safety@kmrl.org
+   OPERATIONS_EMAIL=operations@kmrl.org
    ```
    
    > ⚠️ **Security Note**: Never commit your `.env` file to version control. Use `.env.example` as a template.
 
-4. **Run Application**
+5. **Run the Applications**
+
+   **For Frontend Applications:**
    ```bash
+   # Main UI Dashboard (recommended for most users)
+   python app_ui.py
+   
+   # Department-specific Dashboard
+   python department_app.py
+   ```
+   
+   **For CLI Document Processing:**
+   ```bash
+   # Command-line document processing
    python app.py
    ```
 
-5. **Access the Application**
+6. **Access the Applications**
    
-   Open your browser and navigate to: `http://127.0.0.1:5000`
+   - **Main Dashboard**: `http://127.0.0.1:5000`
+   - **Department Dashboard**: `http://127.0.0.1:5001` (if running department_app.py)
+   
+   > 💡 **Tip**: Start with `python app_ui.py` for the best user experience with the web interface.
 
 ## Usage
 
@@ -167,6 +226,27 @@ The InfoBox platform follows a modular, microservices-based architecture designe
 - **Job Card Creation** - Generate job cards with one-click assignment
 - **Compliance Monitoring** - Track regulatory deadlines and requirements
 - **Multi-channel Notifications** - Receive alerts via email, SMS, or push notifications
+
+### Email Notification System
+
+InfoBox includes a comprehensive email notification system for real-time alerts:
+
+**Configuration Requirements:**
+- Configure SMTP settings in `.env` file
+- Set up department-specific email addresses
+- Use Gmail App Passwords for enhanced security
+
+**Notification Types:**
+- Document processing completion alerts
+- Job card assignments and status updates
+- Compliance deadline reminders
+- Inter-department communication alerts
+- System status notifications
+
+**Department-Specific Routing:**
+- Each KMRL department has dedicated email addresses
+- Automatic routing based on document classification
+- Role-based notification preferences
 
 ## Project Structure
 
