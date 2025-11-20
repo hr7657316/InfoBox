@@ -91,6 +91,10 @@ Watch InfoBox in action! This demo showcases the complete document processing wo
 
 The InfoBox platform follows a modular, event-driven architecture designed for scalability and maintainability:
 
+![System Architecture](docs/images/system-architecture.png)
+
+### **Detailed Architecture Flow**
+
 ```mermaid
 graph TD
     A[Web Interface] --> B[Flask API Gateway]
