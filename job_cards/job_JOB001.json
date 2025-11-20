@@ -4,9 +4,9 @@
   "department": "engineering",
   "assigned_by": "Safety Department",
   "priority": "high",
-  "deadline": "2025-10-08T15:31:35.480778",
+  "deadline": "2025-11-25T11:07:56.747521",
   "status": "pending",
-  "created_date": "2025-10-03T15:31:35.480780",
+  "created_date": "2025-11-20T11:07:56.747522",
   "description": "Review and approve new safety circular for platform operations",
   "estimated_hours": 4
 }
